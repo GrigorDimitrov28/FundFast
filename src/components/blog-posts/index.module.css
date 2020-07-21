@@ -1,0 +1,40 @@
+.container {
+    display:flex;
+    flex-direction: column;
+}
+.posts {
+    flex-direction: column;
+    display:flex;
+}
+
+.head {
+    margin-left: 2.5rem;
+}
+
+.topRow {
+    display: flex;
+}
+
+.bottomRow {
+    display: flex;
+}
+
+.post {
+    display:flex;
+    flex-direction:column;
+    margin : 1.5rem 1.5rem 1.5rem 2.5rem;
+}
+
+.post img {
+    object-fit: cover;
+    width: 50rem;
+    height: 20rem;
+}
+
+
+.post a {
+    text-align: right;
+    font-size: 12pt;
+    color: black;
+    font-weight: bold;
+}

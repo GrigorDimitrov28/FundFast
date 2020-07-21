@@ -1,0 +1,13 @@
+nav {
+    display: flex;
+}
+
+.leftLink {
+    margin: 1rem 0 0 0.5rem;
+    text-align: center;
+}
+
+.rightLinks {
+    margin: 1.5rem 1rem 0 auto;
+    text-align: center;
+}

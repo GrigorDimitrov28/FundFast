@@ -1,0 +1,38 @@
+
+nav a {
+    text-decoration: none;
+    font-size: 72px;
+}
+
+nav a:not(.link-left) {
+    color: black;
+    margin-top: auto;
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size :1.1rem;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover{
+    background-image: linear-gradient(to right, red 25%, purple 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* #cc2b5e 0%, #753a88 100% */
+
+.link-left {
+    margin: 1rem 0 0 1.5rem;
+    background-image: linear-gradient(to right,red 25%, purple 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 1000;
+}
