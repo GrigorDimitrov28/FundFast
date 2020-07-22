@@ -1,9 +1,13 @@
-import React from 'react';
-import styles from './index.module.css';
-const Link = ({ text, type, href }) => {
+import React from 'react'
+import styles from './index.module.css'
+import { Link } from 'react-router-dom'
+
+const LinkComponent = ({text, type, href}) => {
     return (
-        <a className={styles[type]} href={href}> {text} </a>
+        <Link to={href} className={styles[type]}>
+            {text}
+        </Link>
     )
 }
 
-export default Link;
+export default LinkComponent;

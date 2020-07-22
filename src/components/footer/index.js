@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '../links';
+import LinkComponent from '../links';
 import styles from './index.module.css';
 const Footer = () => {
     return (
@@ -13,16 +13,16 @@ const Footer = () => {
                 </div>
                 <div>
                     <h3>Explore</h3>
-                    <Link type="link" text="Donations" href="#" />
-                    <Link type="link" text="Campaigns" href="#" />
-                    <Link type="link" text="Product Development" href="#" />
-                    <Link type="link" text="Startups" href="#" />
+                    <LinkComponent type="link" text="Donations" href="#" />
+                    <LinkComponent type="link" text="Campaigns" href="#" />
+                    <LinkComponent type="link" text="Product Development" href="#" />
+                    <LinkComponent type="link" text="Startups" href="#" />
                 </div>
                 <div>
                     <h3>About</h3>
-                    <Link type="link" text="Who are we" href="#" />
-                    <Link type="link" text="Our badge system" href="#" />
-                    <Link type="link" text="How to get started" href="#" />
+                    <LinkComponent type="link" text="Who are we" href="#" />
+                    <LinkComponent type="link" text="Our badge system" href="#" />
+                    <LinkComponent type="link" text="How to get started" href="#" />
                 </div>
                 <div>
                     <h3>Contacts</h3>
@@ -33,9 +33,9 @@ const Footer = () => {
             </div>
             <div className={styles.bottom} id="bottom">
                 © 2020 FundFast. All rights reserved.
-                <Link href="https://www.instagram.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/174/174855.svg" alt="Instagram"/>} />
-                <Link href="https://www.twitter.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/733/733579.svg" alt="Twitter"/>} />
-                <Link href="https://www.facebook.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/1312/1312139.svg" alt="Facebook"/>} />
+                <LinkComponent href="https://www.instagram.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/174/174855.svg" alt="Instagram"/>} />
+                <LinkComponent href="https://www.twitter.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/733/733579.svg" alt="Twitter"/>} />
+                <LinkComponent href="https://www.facebook.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/1312/1312139.svg" alt="Facebook"/>} />
             </div>
         </footer>
     )
