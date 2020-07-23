@@ -21,10 +21,18 @@
   margin: 1rem 0 1.5rem 1rem;
   height: 3rem; 
   background: white;
-  border-radius: 6px;
+  outline: none;
 }
 
 .button:hover {
   background-color: black;
   color: white;
+}
+
+.active {
+  margin: 1rem 0 1.5rem 1rem;
+  height: 3rem; 
+  background-color: black;
+  color: white;
+  outline: none;
 }
