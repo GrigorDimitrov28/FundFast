@@ -32,7 +32,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className={styles.bottom} id="bottom">
-                © 2020 FundFast. All rights reserved.
+                <p>© 2020 FundFast. All rights reserved.</p>
                 <LinkComponent href="https://www.instagram.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/174/174855.svg" alt="Instagram"/>} />
                 <LinkComponent href="https://www.twitter.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/733/733579.svg" alt="Twitter"/>} />
                 <LinkComponent href="https://www.facebook.com/" text={<img id="instagram" src="https://image.flaticon.com/icons/svg/1312/1312139.svg" alt="Facebook"/>} />
