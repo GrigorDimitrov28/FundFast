@@ -11,7 +11,7 @@
     margin: 2.5rem auto 2.5rem auto;
     background-color:white;
     width: 28rem;
-    height: 33rem;
+    height: auto;
     display: flex;
     flex-direction: column;
     border: 1px solid grey;
@@ -68,4 +68,9 @@ input {
 .register {
     margin: auto 0 auto 1rem;
     color: rgb(116, 58, 80);
+}
+
+.error {
+    margin: 0.1rem 0 0.1rem 1.5rem;
+    color:red 
 }
