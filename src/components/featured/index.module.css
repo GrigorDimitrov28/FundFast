@@ -21,18 +21,22 @@
   margin: 1rem 0 1.5rem 1rem;
   height: 3rem; 
   background: white;
+  border-color: rgb(116, 58, 80);
+  color: rgb(116, 58, 80);
   outline: none;
 }
 
 .button:hover {
-  background-color: black;
+  background-color: rgb(116, 58, 80);
+  border-color: rgb(116, 58, 80);
   color: white;
 }
 
 .active {
   margin: 1rem 0 1.5rem 1rem;
   height: 3rem; 
-  background-color: black;
+  border-color: rgb(116, 58, 80);
+  background-color: rgb(116, 58, 80);
   color: white;
   outline: none;
 }
