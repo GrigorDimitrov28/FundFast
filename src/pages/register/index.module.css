@@ -37,6 +37,7 @@ input {
 }
 
 .submit {
+    cursor: pointer;
     background-color: rgb(116, 58, 80);
     color: white;
     font-size: 14px;
