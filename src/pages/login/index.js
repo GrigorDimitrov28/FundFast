@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'
 import handleBlurUsername from '../../utils/validation/username'
 import handleBlurPassword from '../../utils/validation/password'
 import handleChange from '../../utils/validation/change'
-
+import authenticate from '../../utils/auth/auth'
+import UserContext from '../../Context'
 class LoginForm extends Component {
     constructor(props) {
         super(props)
@@ -23,13 +24,32 @@ class LoginForm extends Component {
             passwordErrorIsHidden: true
         }
     }
+    
+    static contextType = UserContext
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state
+
+        await authenticate('http://localhost:9999/api/user/login', {
+            username,
+            password
+        }, (user) => {
+            this.context.logIn(user)
+            this.props.history.push('/')
+        }, (err) => {
+            console.log('Error', err)
+        })
+    }
     render() {
         return (
             <div className={styles.wrapper}>
                 <div className={styles.loginWrapper}>
                     <h2 className={styles.login}>Sign In</h2>
-                    <form className={styles.loginForm}>
+                    <form className={styles.loginForm} onSubmit={this.handleSubmit}>
                         <Input name="username"
                             placeholder="Username"
                             value={this.state.username}
@@ -70,11 +90,11 @@ class LoginForm extends Component {
     }
 }
 
-const LazyLoginPage = () => {
+const LazyLoginPage = (props) => {
     return (
         <div className="container">
             <Navbar />
-            <LoginForm />
+            <LoginForm {...props}/>
             <Footer />
         </div>
     )

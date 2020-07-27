@@ -9,6 +9,8 @@ import handleBlurUsername from '../../utils/validation/username'
 import handleBlurPassword from '../../utils/validation/password'
 import handleBlurRePassword from '../../utils/validation/rePassword'
 import handleChange from '../../utils/validation/change'
+import authenticate from '../../utils/auth/auth'
+import UserContext from '../../Context'
 class RegisterForm extends Component {
     constructor(props) {
         super(props)
@@ -25,12 +27,31 @@ class RegisterForm extends Component {
             rePasswordErrorIsHidden: true
         }
     }
+
+    static contextType = UserContext
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state
+
+        await authenticate('http://localhost:9999/api/user/register', {
+            username,
+            password
+        }, (user) => {
+            this.context.logIn(user)
+            this.props.history.push('/')
+        }, (err) => {
+            console.log('Error', err)
+        })
+    }
     render() {
         return (
             <div className={styles.wrapper}>
                 <div className={styles.loginWrapper}>
                     <h2 className={styles.login}>Sign up</h2>
-                    <form className={styles.loginForm}>
+                    <form className={styles.loginForm} onSubmit={this.handleSubmit}>
                         <Input name="username"
                             placeholder="Username"
                             value={this.state.username}
@@ -58,7 +79,7 @@ class RegisterForm extends Component {
                                 || this.state.rePasswordErrorIsHidden === false
                                 || !this.state.username
                                 || !this.state.password
-                                || !this.state.rePassword }
+                                || !this.state.rePassword}
                             className={styles.submit}>
                             Sign Up
                         </button>
@@ -84,11 +105,11 @@ class RegisterForm extends Component {
     }
 }
 
-const LazyRegisterPage = () => {
+const LazyRegisterPage = (props) => {
     return (
         <div className="container">
             <Navbar />
-            <RegisterForm />
+            <RegisterForm {...props}/>
             <Footer />
         </div>
     )
