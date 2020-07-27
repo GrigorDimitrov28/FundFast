@@ -18,7 +18,7 @@ nav a:not(.link-left) {
 }
 
 .link:hover{
-    background-image: linear-gradient(to right, red 25%, purple 100%);
+    background-image: linear-gradient(to right,#cc0000 25%, purple 100%);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -28,7 +28,7 @@ nav a:not(.link-left) {
 
 .link-left {
     margin: 1rem 0 0 1.5rem;
-    background-image: linear-gradient(to right,red 25%, purple 100%);
+    background-image: linear-gradient(to right,#cc0000 25%, purple 100%);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;

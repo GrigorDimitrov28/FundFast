@@ -24,6 +24,7 @@
   border-color: rgb(116, 58, 80);
   color: rgb(116, 58, 80);
   outline: none;
+  border-radius: 5px;
 }
 
 .button:hover {
@@ -35,6 +36,7 @@
 .active {
   margin: 1rem 0 1.5rem 1rem;
   height: 3rem; 
+  border-radius: 5px;
   border-color: rgb(116, 58, 80);
   background-color: rgb(116, 58, 80);
   color: white;
