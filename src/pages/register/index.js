@@ -11,6 +11,7 @@ import handleBlurRePassword from '../../utils/validation/rePassword'
 import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
+
 class RegisterForm extends Component {
     constructor(props) {
         super(props)

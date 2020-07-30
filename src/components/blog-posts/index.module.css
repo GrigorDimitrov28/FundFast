@@ -12,10 +12,14 @@
 }
 
 .topRow {
+    margin-left: 1.5rem;
+    margin-right: 2.5rem;
     display: flex;
 }
 
 .bottomRow {
+    margin-left: 1.5rem;
+    margin-right: 2.5rem;
     display: flex;
 }
 
@@ -35,6 +39,6 @@
 .post a {
     text-align: right;
     font-size: 12pt;
-    color: black;
+    color: rgb(116, 58, 80);
     font-weight: bold;
 }

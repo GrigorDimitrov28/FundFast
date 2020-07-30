@@ -36,3 +36,26 @@ nav a:not(.link-left) {
     font-size: 2rem;
     font-weight: 1000;
 }
+
+.button{
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    
+    height: 3.5vw;
+    width: 15vw;
+    bottom: 3vw;
+    right: 3vw;
+
+    padding-top: 0.7vw;
+
+    text-align: center;
+    text-decoration: none;
+    background: white;
+    border: 0.25vw solid  rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+
+    font-size: 2vw;
+    outline: none;
+    border-radius: 5px;
+}

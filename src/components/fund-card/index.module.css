@@ -8,7 +8,7 @@
   
   
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgb(116, 58, 80, 0.7);
 }
   
   
@@ -25,6 +25,6 @@ img {
     margin-bottom: 1rem;
     float: right;
     font-size: 12pt;
-    color: black;
+    color: rgb(116, 58, 80);
     font-weight: bold;
 }
