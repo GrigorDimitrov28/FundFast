@@ -22,7 +22,7 @@
 
     background: white;
     border-color: rgb(116, 58, 80);
-    color: rgb(116, 58, 80);
+    /* color: rgb(116, 58, 80); */
     font-size: 2vw;
     outline: none;
     border-radius: 5px;
@@ -31,9 +31,18 @@
 .join {
     width: 15vw;
     position: absolute;
-    word-wrap: break-word;
     top: 2vw;
-    right: 1.5vw;
+    right: 3vw;
+}
+
+.joinUsWhite {
+    word-wrap: break-word;
+    color: white;
+}
+
+.joinUsBlack {
+    word-wrap: break-word;
+    color: black;
 }
 
 .join p {
