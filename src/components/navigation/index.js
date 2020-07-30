@@ -10,7 +10,7 @@ const Navbar = () => {
 
             <div className={styles.rightLinks}>
                 <LinkComponent text="Explore" type="link" href="#" />
-                <LinkComponent text="About" type="link" href="#" />
+                <LinkComponent text="About" type="link" href="/about" />
                 <LinkComponent text="Sign In" type="link" href="/login" />
             </div>
         </nav>
