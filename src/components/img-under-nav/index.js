@@ -5,7 +5,7 @@ const Photo = ({ source }) => {
     return (
 
         <img className={styles['big-photo']}
-            src="./header-photo.png" />
+            src="./photo.png" />
 
     )
 }
