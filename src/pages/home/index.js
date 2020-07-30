@@ -10,7 +10,7 @@ function LazyHomePage() {
   return (
     <div className="container">
       <Navbar />
-      <Photo />
+      <Photo/>
       <Featured />
       <BlogPosts />
       <Footer />

@@ -1,6 +1,41 @@
 .big-photo{margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1vw;
     max-width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+.container {
+    display: inline-block;
+    position: relative;
+}
+
+.button{
+    cursor: pointer;
+    position: absolute;
+    
+    height: 4.5vw;
+    width: 15vw;
+    bottom: 3vw;
+    right: 3vw;
+
+
+    background: white;
+    border-color: rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+    font-size: 2vw;
+    outline: none;
+    border-radius: 5px;
+}
+
+.join {
+    width: 15vw;
+    position: absolute;
+    word-wrap: break-word;
+    top: 2vw;
+    right: 1.5vw;
+}
+
+.join p {
+    font-size: 2vw;
 }
