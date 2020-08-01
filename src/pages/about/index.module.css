@@ -1,6 +1,7 @@
 .content {
     margin: 0 0 0 2.5rem;
     padding-bottom: 3rem;
+    padding-right: 2rem;
 }
 
 .content p {
@@ -31,7 +32,7 @@
 }
 
 .active {
-    margin-left: 24.5rem;
+    margin-left: 31rem;
     height: 5vw;
     width: 6vw;
 }
