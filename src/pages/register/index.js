@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
@@ -12,105 +12,112 @@ import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
 
-class RegisterForm extends Component {
-    constructor(props) {
-        super(props)
+const RegisterForm = () => {
+    const [user, setUser] = useState({
+        value: '',
+        errorMsg: ''
+    })
 
-        this.state = {
-            username: "",
-            password: "",
-            rePassword: "",
-            usernameErrorMsg: "",
-            passwordErrorMsg: "",
-            rePasswordErrorMsg: "",
-            usernameErrorIsHidden: true,
-            passwordErrorIsHidden: true,
-            rePasswordErrorIsHidden: true
-        }
-    }
+    const [password, setPassword] = useState({
+        value: '',
+        errorMsg: ''
+    })
 
-    static contextType = UserContext
-    handleSubmit = async (e) => {
-        e.preventDefault();
-        const {
-            username,
-            password
-        } = this.state
+    const [rePassword, setRePassword] = useState({
+        value: '',
+        errorMsg: ''
+    })
+
+    const [isProcessing, setProcessing] = useState(false)
+
+    const context = useContext(UserContext)
+    const history = useHistory()
+    async function handleSubmit(e, username, password){
+        e.preventDefault()
+        setProcessing(true)
 
         await authenticate('http://localhost:9999/api/user/register', {
             username,
             password
         }, (user) => {
-            this.context.logIn(user)
-            this.props.history.push('/')
+            context.logIn(user)
+            history.push('/')
         }, (err) => {
             console.log('Error', err)
+            setProcessing(false)
+        }, () => {
+            history.push('/500')
         })
     }
-    render() {
-        return (
-            <div className={styles.wrapper}>
-                <div className={styles.loginWrapper}>
-                    <h2 className={styles.login}>Sign up</h2>
-                    <form className={styles.loginForm} onSubmit={this.handleSubmit}>
-                        <Input name="username"
-                            placeholder="Username"
-                            value={this.state.username}
-                            onBlur={() => this.setState(handleBlurUsername(this.state.username))}
-                            onChange={(e) => this.setState(handleChange(e, 'username', this.state.password))} />
-                        <p className={styles.error} hidden={this.state.usernameErrorIsHidden}> {this.state.usernameErrorMsg} </p>
 
-                        <Input name="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onBlur={() => this.setState(handleBlurPassword(this.state.password))}
-                            onChange={(e) => this.setState(handleChange(e, 'password', this.state.password))} />
-                        <p className={styles.error} hidden={this.state.passwordErrorIsHidden}> {this.state.passwordErrorMsg} </p>
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.loginWrapper}>
+                <h2 className={styles.login}>Sign up</h2>
+                <form className={styles.loginForm} onSubmit={(e) => handleSubmit(e, user.value, password.value)}>
+                    <Input name="username"
+                        type="text"
+                        placeholder="Username"
+                        value={user.value}
+                        onBlur={() => setUser({...handleBlurUsername(user)})}
+                        onChange={(e) => setUser({...handleChange(e, 'user', user)})}/>
+                    <p className={styles.error}> {user.errorMsg} </p>
 
-                        <Input name="rePassword"
-                            placeholder="Repeat password"
-                            value={this.state.rePassword}
-                            onBlur={() => this.setState(handleBlurRePassword(this.state.rePassword, this.state.password))}
-                            onChange={(e) => this.setState(handleChange(e, 'rePassword', this.state.password))} />
-                        <p className={styles.error} hidden={this.state.rePasswordErrorIsHidden}> {this.state.rePasswordErrorMsg} </p>
+                    <Input name="password"
+                        type="text"
+                        placeholder="Password"
+                        value={password.value}
+                        onBlur={() => setPassword({...handleBlurPassword(password)})}
+                        onChange={(e) => setPassword({...handleChange(e, 'password', password)})} />
+                    <p className={styles.error}> {password.errorMsg} </p>
 
-                        <button type="submit"
-                            disabled={this.state.usernameErrorIsHidden === false
-                                || this.state.passwordErrorIsHidden === false
-                                || this.state.rePasswordErrorIsHidden === false
-                                || !this.state.username
-                                || !this.state.password
-                                || !this.state.rePassword}
-                            className={styles.submit}>
-                            Sign Up
+                    <Input name="rePassword"
+                        type="text"
+                        placeholder="Repeat password"
+                        value={rePassword.value}
+                        onBlur={() => setRePassword({...handleBlurRePassword(rePassword, password)})}
+                        onChange={(e) => setRePassword({...handleChange(e, 'rePassword', rePassword, password.value)})} />
+                    <p className={styles.error}> {rePassword.errorMsg} </p>
+
+                    <button type="submit"
+                        disabled={user.errorMsg
+                            || password.errorMsg
+                            || rePassword.errorMsg
+                            || isProcessing
+                            || !user.value
+                            || !password.value
+                            || !rePassword.value}
+                        className={styles.submit}>
+                        Sign Up
                         </button>
-                    </form>
-                    <div className={styles.or}>
-                        <hr />
+                </form>
+                <div className={styles.or}>
+                    <hr />
                         or
                         <hr />
-                    </div>
-                    <button className={styles.submit}>
-                        Sign up with Google
+                </div>
+                <button className={styles.submit}>
+                    Sign up with Google
                     </button>
-                    <button className={styles.submit}>
-                        Sign up with Facebook
+                <button className={styles.submit}>
+                    Sign up with Facebook
                     </button>
-                    <div className={styles.new}>
-                        <p>Already a member?</p>
-                        <Link to={'/login'} className={styles.register}>Sign In</Link>
-                    </div>
+                <div className={styles.new}>
+                    <p>Already a member?</p>
+                    <Link to={'/login'} className={styles.register}>Sign In</Link>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+
 }
 
-const LazyRegisterPage = (props) => {
+const LazyRegisterPage = () => {
+    
     return (
         <div className="container">
             <Navbar />
-            <RegisterForm {...props}/>
+            <RegisterForm />
             <Footer />
         </div>
     )

@@ -1,4 +1,5 @@
-const authenticate = async (url, body, onSuccess, onFailure) => {
+const authenticate = async (url, body, onSuccess, onFailure, onServerFailure) => {
+
     try {
         const data = await fetch(url, {
             method: 'POST',
@@ -21,7 +22,7 @@ const authenticate = async (url, body, onSuccess, onFailure) => {
             onFailure()
         }
     } catch (e) {
-        onFailure(e)
+        onServerFailure()
     }
 }
 
