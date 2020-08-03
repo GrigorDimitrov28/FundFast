@@ -8,7 +8,6 @@ const Card = () => {
             <Link to={'/details'}>
                 <img src="https://image.shutterstock.com/image-photo/highquality-headphones-on-white-background-600w-1574611990.jpg" alt="Avatar" />
             </Link>
-
             <div className={styles.container}>
                 <h3><b>John Doe</b></h3>
                 <h4>Architect & Engineer</h4>

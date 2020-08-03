@@ -1,8 +1,9 @@
-function handleBlurRePassword(password ,rePassword) {
-    if (rePassword !== password) {
-        return { rePasswordErrorIsHidden: false, rePasswordErrorMsg: "Passwords should match." }
+function handleBlurRePassword(rePassword , password) {
+    if (rePassword.value !== password.value) {
+        rePassword.errorMsg = "Passwords should match."
+        return rePassword
     } else {
-        return { rePasswordErrorIsHidden: true }
+        return rePassword
     }
 }
 

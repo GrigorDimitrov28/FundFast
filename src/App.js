@@ -1,40 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserContext from './Context'
-
 function getCookie(name) {
   const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
   return cookieValue ? cookieValue[2] : null;
 }
-class App extends Component {
-  constructor(props) {
-    super(props)
+const App = (props) => {
+  const [loggedIn, setLoggedIn] = useState(null)
+  const [user, setUser] = useState(null)
+  
 
-    this.state = {
-      loggedIn: null,
-      user: null
-    }
+  const logIn = (user) => {
+    setLoggedIn(true)
+    setUser(user)
   }
 
-  logIn = (user) => {
-    this.setState({
-      loggedIn: true,
-      user
-    })
-  }
-
-  logOut = () => {
+  const logOut = () => {
     document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
-    this.setState({
-      loggedIn: false,
-      user: null
-    })
+    setLoggedIn(false)
+    setUser(null)
   }
 
-  componentDidMount() {
+  useEffect(() => {
     const token = getCookie('x-auth-token')
-
-    if(!token) {
-      this.logOut()
+    if (!token) {
+      logOut()
       return
     }
 
@@ -50,35 +39,28 @@ class App extends Component {
       console.log(promise)
       return promise.json()
     }).then(response => {
-      if(response.status) {
-        this.logIn({
+      if (response.status) {
+        logIn({
           username: response.user.username,
           id: response.user._id
         })
       } else {
-        this.logOut()
+        logOut()
       }
     })
-  }
+  }, [])
 
-  render() {
-    const {
-      loggedIn,
-      user
-    } = this.state
-
-    if (loggedIn === null) {
-      return (<div>Loading...</div>)
-    }
-
+  if (loggedIn === null) {
+    return (<div>Loading...</div>)
+  } else {
     return (
       <UserContext.Provider value={{
         loggedIn,
         user,
-        logIn: this.logIn,
-        logOut: this.logOut
+        logIn: logIn,
+        logOut: logOut
       }}>
-        {this.props.children}
+        {props.children}
       </UserContext.Provider>
     )
   }

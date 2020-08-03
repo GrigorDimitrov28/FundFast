@@ -1,18 +1,24 @@
-function handleChange(e, type, password) {
+function handleChange(e, type, obj, password) {
     const usernameRegex = new RegExp("^[a-zA-Z\\d]{4,15}$", "g")
     const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", "g")
 
-    const returnObj = { [`${type}`]: e.target.value }
+    obj.value = e.target.value
+    
+    if (type === "user" && usernameRegex.test(obj.value)) {
+        obj.errorMsg = ""
 
-    if (type === "username" && usernameRegex.test(e.target.value)) {
-        returnObj.usernameErrorIsHidden = true
-    } else if (type === "password" && passwordRegex.test(e.target.value)) {
-        returnObj.passwordErrorIsHidden = true
-    } else if (type === "rePassword" && e.target.value === password) {
-        returnObj.rePasswordErrorIsHidden = true
+        return obj
+    } else if (type === "password" && passwordRegex.test(obj.value)) {
+        obj.errorMsg = ""
+
+        return obj
+    } else if (type === "rePassword" && obj.value === password) {
+        obj.errorMsg = ""
+        
+        return obj
     }
 
-    return returnObj
+    return obj
 }
 
 export default handleChange
