@@ -10,6 +10,7 @@ import handleBlurPassword from '../../utils/validation/password'
 import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
+
 const LoginForm = () => {
     const [user, setUser] = useState({
         value: '',

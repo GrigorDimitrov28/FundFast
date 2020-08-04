@@ -11,3 +11,23 @@ nav {
     margin: 1rem 1rem 0 auto;
     text-align: center;
 }
+
+.logout {
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    text-decoration: none;
+    font-family: 'PT Serif', serif;
+    font-weight: bold;
+    font-size : 1.1rem;
+    margin-right: 1rem;
+    margin-left: -0.4rem;
+}
+
+.logout:hover{
+    background-image: linear-gradient(to right,#cc0000 25%, purple 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}

@@ -18,16 +18,16 @@ const HomeHeaderPhoto = ( { btnText, href, pText}) => {
     )
 }
 
-const AboutHeaderPhoto = () => {
+const AboutHeaderPhoto = ({ btnText, href, pText}) => {
     return (
         <div className={styles.container}>
             <img className={styles['big-photo']}
                 src="./2.png" alt="header"/>
             <div className={styles.join}>
-                <p className={styles.joinUsWhite}>Join us now and make your change.</p>
+                <p className={styles.joinUsWhite}>{pText}</p>
             </div>
 
-            <LinkComponent text={"Sign Up"} type={"button"} href={"/register"} />
+            <LinkComponent text={btnText} type={"button"} href={href} />
 
         </div>
     )

@@ -10,7 +10,7 @@ function LazyHomePage() {
   return (
     <div className="container">
       <Navbar />
-      <HomeHeaderPhoto btnText={'Add fundraiser'} href={'/create'} pText={'Add a fundraiser and make your change.'} />
+      <HomeHeaderPhoto btnText={'Add fundraiser'} href={'/create-fundraiser'} pText={'Add a fundraiser and make your change.'} />
       <Featured />
       <BlogPosts />
       <Footer />
