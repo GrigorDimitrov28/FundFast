@@ -7,7 +7,7 @@ function getCookie(name) {
 const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(null)
   const [user, setUser] = useState(null)
-  
+
 
   const logIn = (user) => {
     setLoggedIn(true)
@@ -21,6 +21,7 @@ const App = (props) => {
   }
 
   useEffect(() => {
+
     const token = getCookie('x-auth-token')
     if (!token) {
       logOut()
