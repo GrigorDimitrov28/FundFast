@@ -20,8 +20,8 @@ const LazyNavigation = () => {
             <Switch>
                 <Suspense fallback={<h1>Loading..</h1>}>
                     <Route path="/" exact component={context.loggedIn ? LazyUserHomePage : LazyHomePage} />
-                    <Route path="/register" component={!context.loggedIn ? LazyServerErrorPage : LazyRegisterPage} />
-                    <Route path="/login" component={!context.loggedIn ? LazyServerErrorPage : LazyLoginPage} />
+                    <Route path="/register" component={context.loggedIn ? LazyServerErrorPage : LazyRegisterPage} />
+                    <Route path="/login" component={context.loggedIn ? LazyServerErrorPage : LazyLoginPage} />
                     <Route path="/about" component={LazyAboutPage} />
                     <Route path="/500" component={LazyServerErrorPage} />
                 </Suspense>

@@ -9,7 +9,6 @@
     display: inline-block;
     position: relative;
 }
-
 .button{
     cursor: pointer;
     position: absolute;
@@ -31,6 +30,7 @@
 .join {
     width: 15vw;
     position: absolute;
+    word-wrap: break-word;
     top: 2vw;
     right: 3vw;
 }
@@ -44,6 +44,7 @@
     word-wrap: break-word;
     color: black;
 }
+
 
 .join p {
     font-size: 2vw;
