@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
 import { useHistory } from 'react-router-dom'
-import styles from './500.css'
+import './500.css'
 
 const Content = () => {
     const history = useHistory()

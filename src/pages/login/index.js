@@ -10,7 +10,7 @@ import handleBlurPassword from '../../utils/validation/password'
 import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
-
+import FacebookLoginWithButton from 'react-facebook-login'
 const LoginForm = () => {
     const [user, setUser] = useState({
         value: '',
@@ -26,7 +26,21 @@ const LoginForm = () => {
 
     const context = useContext(UserContext)
     const history = useHistory()
-    async function handleSubmit(e, username, password){
+
+    const responseFacebook = (response) => {
+        const { name, email, picture, id } = response;
+        const user = {
+            name, 
+            email,
+            picture,
+            id
+        }
+        if(response.status !== "unknown" && response.status !== "not_authorized"){
+            context.logIn(user)
+            history.push('/')
+        }
+    }
+    async function handleSubmit(e, username, password) {
         e.preventDefault()
         setProcessing(true)
 
@@ -80,12 +94,13 @@ const LoginForm = () => {
                         or
                         <hr />
                 </div>
-                <button className={styles.submit}>
-                    Sign in with Google
-                    </button>
-                <button className={styles.submit}>
-                    Sign in with Facebook
-                    </button>
+                <FacebookLoginWithButton
+                    icon="fa-facebook"
+                    textButton={"Continue with Facebook"}
+                    cssClass={styles.facebook}
+                    appId="298915014500855"
+                    fields="name,email,picture"
+                    callback={responseFacebook} />
                 <div className={styles.new}>
                     <p>New to FundFast?</p>
                     <Link to={'/register'} className={styles.register}>Sign Up</Link>
