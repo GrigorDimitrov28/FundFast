@@ -12,6 +12,8 @@ const LazyLoginPage = React.lazy(() => import('./pages/login'))
 const LazyAboutPage = React.lazy(() => import('./pages/about'))
 const LazyServerErrorPage = React.lazy(() => import('./pages/500'))
 const LazyUserHomePage = React.lazy(() => import('./pages/home-user'))
+const LazyCreateFundraiserPage = React.lazy(() => import('./pages/create-fundraiser'))
+
 const LazyNavigation = () => {
     const context = useContext(UserContext)
 
@@ -23,6 +25,7 @@ const LazyNavigation = () => {
                     <Route path="/register" component={context.loggedIn ? LazyServerErrorPage : LazyRegisterPage} />
                     <Route path="/login" component={context.loggedIn ? LazyServerErrorPage : LazyLoginPage} />
                     <Route path="/about" component={LazyAboutPage} />
+                    <Route path="/create-fundraiser" component={LazyCreateFundraiserPage} />
                     <Route path="/500" component={LazyServerErrorPage} />
                 </Suspense>
             </Switch>
