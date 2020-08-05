@@ -28,14 +28,16 @@ const LoginForm = () => {
     const history = useHistory()
 
     const responseFacebook = (response) => {
-        const { name, email, picture, id } = response;
+        // response.expiresIn = 86400
+        const { name, email, picture, id, accessToken } = response;
         const user = {
-            name, 
+            name,
             email,
             picture,
             id
         }
-        if(response.status !== "unknown" && response.status !== "not_authorized"){
+        if (response.status !== "unknown" && response.status !== "not_authorized") {
+            document.cookie = `fb-auth-token=${accessToken}`
             context.logIn(user)
             history.push('/')
         }
@@ -94,19 +96,12 @@ const LoginForm = () => {
                         or
                         <hr />
                 </div>
-                <FacebookLoginWithButton
-                    icon="fa-facebook"
-                    textButton={"Continue with Facebook"}
-                    cssClass={styles.facebook}
-                    appId="298915014500855"
-                    fields="name,email,picture"
-                    callback={responseFacebook} />
                 <div className={styles.new}>
                     <p>New to FundFast?</p>
                     <Link to={'/register'} className={styles.register}>Sign Up</Link>
                 </div>
             </div>
-        </div>
+        </div >
     )
 
 }
