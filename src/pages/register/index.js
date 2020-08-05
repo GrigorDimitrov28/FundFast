@@ -35,7 +35,7 @@ const RegisterForm = () => {
     const history = useHistory()
 
     const responseFacebook = (response) => {
-        const { name, email, picture, id } = response;
+        const { name, email, picture, id, accessToken } = response;
         const user = {
             name, 
             email,
@@ -43,6 +43,7 @@ const RegisterForm = () => {
             id
         }
         if(response.status !== "unknown" && response.status !== "not_authorized"){
+            document.cookie = `fb-auth-token=${accessToken}`
             context.logIn(user)
             history.push('/')
         }

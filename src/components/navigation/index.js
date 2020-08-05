@@ -10,7 +10,6 @@ const Navbar = () => {
 
     const handleClick = () => {
         window.FB.logout(function(response) {
-            // Person is now logged out
          });
         context.logOut()
         history.push('/')
