@@ -1,65 +1,121 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
 import styles from './index.module.css'
 import Input from '../../components/input'
 import { Link } from 'react-router-dom'
-
+import handleChange from '../../utils/validation/change'
+import handleBlurCategory from '../../utils/validation/category'
+import handleBlurName from '../../utils/validation/fundraiser-name'
+import handleBlurLink from '../../utils/validation/link'
+import handleBlurDescription from '../../utils/validation/description'
 const CreateForm = () => {
+    const history = useHistory()
+
     const [name, setName] = useState({
         value: '',
-        error: ''
+        errorMsg: ''
     })
 
     const [category, setCategory] = useState({
         value: '',
-        error: ''
+        errorMsg: ''
     })
 
     const [image, setImage] = useState({
         value: '',
-        error: ''
+        errorMsg: ''
     })
 
     const [description, setDescription] = useState({
         value: '',
-        error: ''
+        errorMsg: ''
     })
 
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const fundraiser = {
+            name: name.value,
+            category: category.value,
+            image: image.value,
+            description: description.value
+        }
+
+        try {
+            const data = await fetch('http://localhost:9999/api/fundraiser/create', {
+                method: 'POST',
+                body: JSON.stringify(fundraiser),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const response = await data.json()
+
+            if(response._id){
+                console.log(response)
+                history.push('/')
+            }else {
+                history.push('/500')
+            }
+            
+        } catch (e) {
+            history.push('/500')
+        }
+
+    }
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
                 <h2 className={styles.login}>Create a fundraiser</h2>
-                <form className={styles.loginForm}>
+                <form className={styles.loginForm}
+                    onSubmit={(e) => handleSubmit(e)}>
                     <Input name="fundraiser-name"
                         type="text"
+                        onChange={((e) => setName({ ...handleChange(e, 'fundraiser', name) }))}
+                        onBlur={() => setName({ ...handleBlurName(name) })}
                         value={name.value}
                         placeholder="Fundraiser name" />
-                    <p className={styles.error}> {} </p>
+                    <p className={styles.error}> {name.errorMsg} </p>
 
-                    <select value={category.value} className={styles.select}>
-                        <option value="" selected disabled hidden>Category</option>
+                    <select value={category.value}
+                        className={styles.select}
+                        onChange={(e) => setCategory({ value: e.target.value, errorMsg: '' })}
+                        onBlur={() => setCategory({ ...handleBlurCategory(category) })}>
+                        <option hidden value="Category"> Category </option>
                         <option value="Donations">Donations</option>
                         <option value="Campaigns">Campaigns</option>
                         <option value="Product development">Product development</option>
                         <option value="Startups">Startups</option>
                     </select>
-                    <p className={styles.error}> {} </p>
+                    <p className={styles.error}> {category.errorMsg} </p>
 
                     <Input name="img-link"
-                        value={image.value}
                         type="text"
+                        value={image.value}
+                        onChange={((e) => setImage({ ...handleChange(e, 'link', image) }))}
+                        onBlur={() => setImage({ ...handleBlurLink(image) })}
                         placeholder="Image link" />
-                    <p className={styles.error}> {} </p>
+                    <p className={styles.error}> {image.errorMsg} </p>
 
-                    <textarea placeholder="Description" 
-                    className={styles.textarea}
-                    value={description.value} 
+                    <textarea placeholder="Description"
+                        className={styles.textarea}
+                        value={description.value}
+                        onChange={((e) => setDescription({ ...handleChange(e, 'description', description) }))}
+                        onBlur={() => setDescription({ ...handleBlurDescription(description) })}
                     />
-                    <p className={styles.error}> {} </p>
+                    <p className={styles.error}> {description.errorMsg} </p>
 
                     <button type="submit"
-                        className={styles.submit}>
+                        className={styles.submit}
+                        disabled={name.errorMsg
+                            || category.errorMsg
+                            || image.errorMsg
+                            || description.errorMsg
+                            || !name.value
+                            || !category.value
+                            || !image.value
+                            || !description.value}>
                         Create fundraiser
                         </button>
                 </form >

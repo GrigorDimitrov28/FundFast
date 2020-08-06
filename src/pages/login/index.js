@@ -45,7 +45,6 @@ const LoginForm = () => {
     async function handleSubmit(e, username, password) {
         e.preventDefault()
         setProcessing(true)
-
         await authenticate('http://localhost:9999/api/user/login', {
             username,
             password
