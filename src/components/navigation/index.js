@@ -9,8 +9,6 @@ const Navbar = () => {
     const history = useHistory()
 
     const handleClick = () => {
-        window.FB.logout(function(response) {
-         });
         context.logOut()
         history.push('/')
     }
