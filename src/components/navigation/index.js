@@ -3,7 +3,7 @@ import LinkComponent from '../links'
 import styles from './index.module.css'
 import userContext from '../../Context'
 import { useHistory } from "react-router-dom"
-
+import Dropdown from '../dropdown/index'
 const Navbar = () => {
     const context = useContext(userContext)
     const history = useHistory()
@@ -22,7 +22,7 @@ const Navbar = () => {
             <div className={styles.rightLinks}>
                 {context.loggedIn && <LinkComponent text="Explore" type="link" href="#" />}
                 <LinkComponent text="About" type="link" href="/about" />
-                {context.loggedIn && <button className={styles.logout} onClick={handleClick}>Logout</button>}
+                {context.loggedIn && <Dropdown />}
                 {!context.loggedIn && <LinkComponent text="Sign In" type="link" href="/login" />}
             </div>
         </nav>

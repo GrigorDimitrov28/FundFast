@@ -1,0 +1,89 @@
+.dropButton {
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  text-decoration: none;
+  font-family: 'PT Serif', serif;
+  font-weight: bold;
+  font-size : 1.1rem;
+  margin-right: 1rem;
+  outline: none;
+  margin-left: -0.4rem;
+}
+
+.dropButton:hover{
+  background-image: linear-gradient(to right,#cc0000 25%, purple 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.container {
+  display:inline;
+}
+/* Dropdown Menu */
+@keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.dropdown {
+  display:flex;
+  z-index: 1;
+  flex-direction: column;
+  position: absolute;
+  top: 3.5rem;
+  width: 15rem;
+  transform: translateX(-30%);
+  max-height: 111110px;
+  background-color: #f2f2f2;
+  border: 1px solid #474a4d;
+  border-radius: 5px;
+  padding: 1rem;
+  overflow: hidden;
+  animation: fadein 1s;
+}
+
+.dropdown-item {
+  height: 3rem;
+  display: flex;
+}
+
+.dropdown-item:hover {
+  background-color:  #d9d9d9;
+}
+
+.dropdown-link {
+  margin: auto auto auto 3rem;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5rem;
+}
+
+.menu-item .icon-button {
+  margin-right: 0.5rem;
+}
+
+
+.menu-item .icon-button:hover {
+  filter: none;
+}
+
+.menu-item:hover {
+  background-color: #525357;
+}
+
+.icon-right {
+  margin-left: auto;
+}
