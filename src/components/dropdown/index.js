@@ -1,6 +1,9 @@
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import UserContext from '../../Context'
+
 function App() {
   return (
     <NavItem>
@@ -22,7 +25,13 @@ function NavItem(props) {
 }
 
 function DropdownMenu() {
-
+  const history = useHistory()
+  const context = useContext(UserContext)
+  
+  const handleClick = () => {
+    context.logOut()
+    history.push('/')
+  }
 
   return (
     <div className={styles.dropdown}>
@@ -33,7 +42,10 @@ function DropdownMenu() {
         <Link className={styles['dropdown-link']}>Settings</Link>
       </div>
       <div className={styles['dropdown-item']}>
-        <Link className={styles['dropdown-link']}>Logout</Link>
+        <button className={styles['dropdown-button']}
+          onClick={handleClick}>
+          Logout
+          </button>
       </div>
     </div>
   );
