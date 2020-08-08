@@ -2,16 +2,10 @@ import React, { useContext } from 'react'
 import LinkComponent from '../links'
 import styles from './index.module.css'
 import userContext from '../../Context'
-import { useHistory } from "react-router-dom"
 import Dropdown from '../dropdown/index'
+
 const Navbar = () => {
     const context = useContext(userContext)
-    const history = useHistory()
-
-    const handleClick = () => {
-        context.logOut()
-        history.push('/')
-    }
 
     return (
         <nav className={styles.nav}>

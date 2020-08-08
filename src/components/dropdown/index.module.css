@@ -58,6 +58,19 @@
   margin: auto auto auto 3rem;
 }
 
+.dropdown-button {
+  background-color: unset;
+  text-align: center;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    font-family: 'PT Serif', serif;
+    font-weight: bold;
+    font-size : 1.1rem;
+    margin: auto auto auto 2.7rem;
+    outline: none;
+}
+
 .menu {
   width: 100%;
 }

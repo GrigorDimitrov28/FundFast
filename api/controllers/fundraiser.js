@@ -1,6 +1,12 @@
 const models = require('../models')
 
 module.exports = {
+    get: (req, res, nex) => {
+        models.Fundraiser.find({category: req.body.category})
+        .then((data) => res.send(data))
+        .catch((err) => res.status(500).send('Error'))
+    },
+
     post: (req, res, next) => {
         const { name, category, image, description } = req.body
 
