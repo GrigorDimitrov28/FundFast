@@ -11,16 +11,27 @@ module.exports = {
 
     post: {
         register: (req, res, next) => {
-            const { username, password } = req.body;
-            models.User.create({ username, password })
-                .then((createdUser) => {
-                    const token = utils.jwt.createToken({ id: createdUser._id });
-                    res.header("Authorization", token).send(createdUser);
-                })
-                .catch((err) => {
+            const { username, password, rePassword } = req.body;
+            const usernameError = utils.validate.username(username)
+            const passwordError = utils.validate.password(password)
+            const rePasswordError = utils.validate.rePassword(rePassword, password)
 
-                    console.log(err)
+            if (usernameError || passwordError || rePasswordError) {
+                res.send({
+                    usernameError,
+                    passwordError,
+                    rePasswordError
                 })
+            } else {
+                models.User.create({ username, password })
+                    .then((createdUser) => {
+                        const token = utils.jwt.createToken({ id: createdUser._id });
+                        res.header("Authorization", token).send(createdUser);
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
         },
 
         verifyLogin: (req, res, next) => {

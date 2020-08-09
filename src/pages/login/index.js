@@ -10,7 +10,6 @@ import handleBlurPassword from '../../utils/validation/password'
 import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
-import FacebookLoginWithButton from 'react-facebook-login'
 const LoginForm = () => {
     const [user, setUser] = useState({
         value: '',
@@ -26,22 +25,6 @@ const LoginForm = () => {
 
     const context = useContext(UserContext)
     const history = useHistory()
-
-    const responseFacebook = (response) => {
-        // response.expiresIn = 86400
-        const { name, email, picture, id, accessToken } = response;
-        const user = {
-            name,
-            email,
-            picture,
-            id
-        }
-        if (response.status !== "unknown" && response.status !== "not_authorized") {
-            document.cookie = `fb-auth-token=${accessToken}`
-            context.logIn(user)
-            history.push('/')
-        }
-    }
     async function handleSubmit(e, username, password) {
         e.preventDefault()
         setProcessing(true)

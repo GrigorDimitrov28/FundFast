@@ -1,4 +1,4 @@
-const authenticate = async (url, body, onSuccess, onFailure, onServerFailure) => {
+const authenticate = async (url, body, onSuccess, onFailure, onServerFailure, onValidationError) => {
 
     try {
         const data = await fetch(url, {
@@ -12,7 +12,9 @@ const authenticate = async (url, body, onSuccess, onFailure, onServerFailure) =>
         document.cookie = `x-auth-token=${authToken}`
 
         const response = await data.json()
-
+        if(response.usernameError || response.passwordError || response.rePasswordError){
+            return response
+        }
         if (response.username && authToken) {
             onSuccess({
                 username: response.username,

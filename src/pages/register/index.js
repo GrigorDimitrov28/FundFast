@@ -11,7 +11,6 @@ import handleBlurRePassword from '../../utils/validation/rePassword'
 import handleChange from '../../utils/validation/change'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
-import FacebookLoginWithButton from 'react-facebook-login'
 
 const RegisterForm = () => {
     const [user, setUser] = useState({
@@ -33,28 +32,14 @@ const RegisterForm = () => {
 
     const context = useContext(UserContext)
     const history = useHistory()
-
-    const responseFacebook = (response) => {
-        const { name, email, picture, id, accessToken } = response;
-        const user = {
-            name, 
-            email,
-            picture,
-            id
-        }
-        if(response.status !== "unknown" && response.status !== "not_authorized"){
-            document.cookie = `fb-auth-token=${accessToken}`
-            context.logIn(user)
-            history.push('/')
-        }
-    }
-    async function handleSubmit(e, username, password){
+    async function handleSubmit(e, username, pass, rePass) {
         e.preventDefault()
         setProcessing(true)
 
-        await authenticate('http://localhost:9999/api/user/register', {
+        const auth = await authenticate('http://localhost:9999/api/user/register', {
             username,
-            password
+            password: pass,
+            rePassword: rePass
         }, (user) => {
             context.logIn(user)
             history.push('/')
@@ -64,35 +49,41 @@ const RegisterForm = () => {
         }, () => {
             history.push('/500')
         })
+
+        if(auth.usernameError || auth.passwordError || auth.rePasswordError){
+            setUser({ ...user, errorMsg: auth.usernameError })
+            setPassword({ ...password, errorMsg: auth.passwordError })
+            setRePassword({ ...rePassword, errorMsg: auth.rePasswordError })
+        }
     }
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
                 <h2 className={styles.login}>Sign up</h2>
-                <form className={styles.loginForm} onSubmit={(e) => handleSubmit(e, user.value, password.value)}>
+                <form className={styles.loginForm} onSubmit={(e) => handleSubmit(e, user.value, password.value, rePassword.value)}>
                     <Input name="username"
                         type="text"
                         placeholder="Username"
                         value={user.value}
-                        onBlur={() => setUser({...handleBlurUsername(user)})}
-                        onChange={(e) => setUser({...handleChange(e, 'user', user)})}/>
+                        onBlur={() => setUser({ ...handleBlurUsername(user) })}
+                        onChange={(e) => setUser({ ...handleChange(e, 'user', user) })} />
                     <p className={styles.error}> {user.errorMsg} </p>
 
                     <Input name="password"
                         type="text"
                         placeholder="Password"
                         value={password.value}
-                        onBlur={() => setPassword({...handleBlurPassword(password)})}
-                        onChange={(e) => setPassword({...handleChange(e, 'password', password)})} />
+                        onBlur={() => setPassword({ ...handleBlurPassword(password) })}
+                        onChange={(e) => setPassword({ ...handleChange(e, 'password', password) })} />
                     <p className={styles.error}> {password.errorMsg} </p>
 
                     <Input name="rePassword"
                         type="text"
                         placeholder="Repeat password"
                         value={rePassword.value}
-                        onBlur={() => setRePassword({...handleBlurRePassword(rePassword, password)})}
-                        onChange={(e) => setRePassword({...handleChange(e, 'rePassword', rePassword, password.value)})} />
+                        onBlur={() => setRePassword({ ...handleBlurRePassword(rePassword, password) })}
+                        onChange={(e) => setRePassword({ ...handleChange(e, 'rePassword', rePassword, password.value) })} />
                     <p className={styles.error}> {rePassword.errorMsg} </p>
 
                     <button type="submit"
@@ -112,13 +103,6 @@ const RegisterForm = () => {
                         or
                         <hr />
                 </div>
-                <FacebookLoginWithButton
-                    icon="fa-facebook"
-                    textButton={"Continue with Facebook"}
-                    cssClass={styles.facebook}
-                    appId="298915014500855"
-                    fields="name,email,picture"
-                    callback={responseFacebook} />
                 <div className={styles.new}>
                     <p>Already a member?</p>
                     <Link to={'/login'} className={styles.register}>Sign In</Link>
@@ -130,7 +114,7 @@ const RegisterForm = () => {
 }
 
 const LazyRegisterPage = () => {
-    
+
     return (
         <div className="container">
             <Navbar />

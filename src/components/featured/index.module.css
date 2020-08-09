@@ -8,6 +8,17 @@
     display: flex;
 }
 
+.current {
+  display: flex;
+  flex-direction: row;
+}
+
+.noPosts {
+  margin-left:auto;
+  margin-right: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
 
 .cards {
   display: flex;

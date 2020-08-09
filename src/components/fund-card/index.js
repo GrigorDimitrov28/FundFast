@@ -2,12 +2,13 @@ import React from 'react'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 
-const Card = (image, name, category, description) => {
+const Card = ({ image, name, category, description }) => {
     return (
         <div className={styles.card}>
-            <Link to={'/details'}>
-                <img src={image} alt="Avatar" />
-            </Link>
+            <div className={styles.cardImage}
+            style={{'backgroundImage': `url(${image})`}}>
+            <Link to={'/details'} />
+            </div>
             <div className={styles.container}>
                 <h3><b>{name}</b></h3>
                 <h4>{category}</h4>
