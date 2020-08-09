@@ -1,0 +1,61 @@
+.content {
+    margin-top: 1rem;
+    height: 45rem;
+    width: 100%;
+}
+
+.internalNav {
+    display: flex;
+    background-color: rgb(116, 58, 80);
+    opacity: 1;
+    height: 3rem;
+    width: 100%;
+}
+
+.activeLink {
+    display: block;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    margin-top: auto;
+    font-style: italic;
+    margin-bottom: auto;
+}
+
+.internalLink{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.firstInternalLink {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 4rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.options {
+    margin-left: 3.8rem;
+}
+
+.option {
+    margin-top: 3rem;
+}
+
+.option input {
+    padding-left: 0.5rem;
+    width: 24rem;
+    height: 2.5rem;
+    border-color: black;
+    border: 0.1rem solid black;
+    outline: none;
+}
