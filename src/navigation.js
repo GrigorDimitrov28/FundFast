@@ -13,7 +13,8 @@ const LazyAboutPage = React.lazy(() => import('./pages/about'))
 const LazyServerErrorPage = React.lazy(() => import('./pages/500'))
 const LazyUserHomePage = React.lazy(() => import('./pages/home-user'))
 const LazyCreateFundraiserPage = React.lazy(() => import('./pages/create-fundraiser'))
-
+const LazyProfilePage = React.lazy(() => import('./pages/profile-page'))
+const LazyProfileSettingsPage = React.lazy(() => import('./pages/account-settings'))
 const LazyNavigation = () => {
     const context = useContext(UserContext)
 
@@ -27,6 +28,8 @@ const LazyNavigation = () => {
                     <Route path="/about" component={LazyAboutPage} />
                     <Route path="/create-fundraiser" component={LazyCreateFundraiserPage} />
                     <Route path="/500" component={LazyServerErrorPage} />
+                    <Route path="/account-settings" component={!context.loggedIn ? LazyServerErrorPage : LazyProfileSettingsPage} />
+                    <Route path="/account-info" component={!context.loggedIn ? LazyServerErrorPage : LazyProfilePage} />
                 </Suspense>
             </Switch>
         </BrowserRouter>

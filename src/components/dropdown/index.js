@@ -27,20 +27,28 @@ function DropdownMenu() {
   const history = useHistory()
   const context = useContext(UserContext)
 
-  const handleClick = () => {
+  const handleLogoutClick = () => {
     context.logOut()
     history.push('/')
   }
 
+  const handleSettingsClick = () => {
+    history.push('/account-settings')
+  }
+
+  const handleAccountInfoClick = () => {
+    history.push('/account-info')
+  }
+
   return (
     <div className={styles.dropdown}>
-      <div className={styles['dropdown-item']} onClick={handleClick} >
+      <div className={styles['dropdown-item']} onClick={handleAccountInfoClick} >
         <p>My profile</p>
       </div>
-      <div className={styles['dropdown-item']} onClick={handleClick} >
+      <div className={styles['dropdown-item']} onClick={handleSettingsClick} >
         <p>Settings</p>
       </div>
-      <div className={styles['dropdown-item']} onClick={handleClick}>
+      <div className={styles['dropdown-item']} onClick={handleLogoutClick}>
         <p>Logout</p>
       </div>
     </div>
