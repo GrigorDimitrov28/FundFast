@@ -20,22 +20,47 @@ const AccountSettings = () => {
             <div className={styles.options}>
                 <div className={styles.option}>
                     <h2>Change profile picture: </h2>
-                    <input placeholder="Image url..."></input>
+                    <div className={styles.changeInput}>
+                        <input placeholder="Image url..."></input>
+                        <button className={styles.submit}>
+                            Change photo
+                        </button>
+                    </div>
+
                 </div>
                 <div className={styles.option}>
-                    <h2>Deposit money: </h2> 
-                    <input placeholder="00.00$"></input>
+                    <h2>Deposit money: </h2>
+                    <div className={styles.changeInput}>
+                        <input placeholder="00.00$"></input>
+                        <button className={styles.submit}>
+                            Deposit
+                        </button>
+                    </div>
                 </div>
                 <div className={styles.option}>
-                    <h2>Add email: </h2>
-                    <input placeholder="Email"></input>
+                    <h2>{context.email ? 'Change email: ' : 'Add email: '}</h2>
+                    <div className={styles.changeInput}>
+                        <input placeholder="Email"></input>
+                        <button className={styles.submit}>
+                            Submit email
+                        </button>
+                    </div>
                 </div>
                 <div className={styles.option}>
                     <h2>Get notified about: </h2>
-                    <button>Donations</button>
-                    <button>Campaigns</button>
-                    <button>Product development</button>
-                    <button>Startups</button>
+                    <div className={styles.formInput}>
+                        <form>
+                            <input type="checkbox" id="Donations" />
+                            <label htmlFor="Donations">Donations</label>
+                            <input type="checkbox" id="Campaigns" />
+                            <label htmlFor="Campaigns">Campaigns</label>
+                            <input type="checkbox" id="Product development" />
+                            <label htmlFor="Product development">Product development</label>
+                            <input type="checkbox" id="Startups" />
+                            <label htmlFor="Startups">Startups</label>
+                        </form>
+                        <button className={styles.formSubmit}>Subscribe</button>
+                    </div>
                 </div>
             </div>
         </div>
