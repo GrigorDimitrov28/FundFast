@@ -67,19 +67,29 @@ module.exports = {
         },
 
         login: (req, res, next) => {
-            const { username, password } = req.body;
-            models.User.findOne({ username })
-                .then((user) => Promise.all([user, user.matchPassword(password)]))
-                .then(([user, match]) => {
-                    if (!match) {
-                        res.status(401).send('Invalid password');
-                        return;
-                    }
+            const { username, password } = req.body
+            const usernameError = utils.validate.username(username)
+            const passwordError = utils.validate.password(password)
 
-                    const token = utils.jwt.createToken({ id: user._id });
-                    res.header("Authorization", token).send(user);
+            if (usernameError || passwordError) {
+                res.send({
+                    usernameError,
+                    passwordError
                 })
-                .catch(next);
+            } else {
+                models.User.findOne({ username })
+                    .then((user) => Promise.all([user, user.matchPassword(password)]))
+                    .then(([user, match]) => {
+                        if (!match) {
+                            res.status(401).send('Invalid password');
+                            return;
+                        }
+
+                        const token = utils.jwt.createToken({ id: user._id });
+                        res.header("Authorization", token).send(user);
+                    })
+                    .catch(next);
+            }
         },
 
         logout: (req, res, next) => {
@@ -97,14 +107,14 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        if(req.body.money){
-            models.User.findOneAndUpdate({_id: id}, {$inc : {'money' : req.body.money}})
-            .then((updatedUser) => res.send(updatedUser))
-            .catch(next)
-        }else{
+        if (req.body.money) {
+            models.User.findOneAndUpdate({ _id: id }, { $inc: { 'money': req.body.money } })
+                .then((updatedUser) => res.send(updatedUser))
+                .catch(next)
+        } else {
             models.User.updateOne({ _id: id }, req.body)
-            .then((updatedUser) => res.send(updatedUser))
-            .catch(next)
+                .then((updatedUser) => res.send(updatedUser))
+                .catch(next)
         }
     },
 

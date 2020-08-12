@@ -25,14 +25,14 @@ const LoginForm = () => {
 
     const context = useContext(UserContext)
     const history = useHistory()
-    async function handleSubmit(e, username, password) {
+    async function handleSubmit(e, username, pass) {
         e.preventDefault()
         setProcessing(true)
-        await authenticate('http://localhost:9999/api/user/login', {
+        
+        const auth = await authenticate('http://localhost:9999/api/user/register', {
             username,
-            password
+            password: pass
         }, (user) => {
-            console.log(user)
             context.logIn(user)
             history.push('/')
         }, (err) => {
@@ -41,6 +41,11 @@ const LoginForm = () => {
         }, () => {
             history.push('/500')
         })
+
+        if(auth && (auth.usernameError || auth.passwordError)){
+            setUser({ ...user, errorMsg: auth.usernameError })
+            setPassword({ ...password, errorMsg: auth.passwordError })
+        }
     }
 
     return (
