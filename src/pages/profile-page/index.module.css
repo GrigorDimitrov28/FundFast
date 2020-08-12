@@ -51,7 +51,11 @@
 }
 
 .leftContent h1 {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.leftContent h3 {
+    padding-bottom: 1rem;
 }
 
 .rightContent {
@@ -84,3 +88,4 @@
     margin: 2rem 1rem 1rem 1rem;
     font-size: 1.1rem;
 }
+

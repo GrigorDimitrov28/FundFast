@@ -32,6 +32,7 @@ const LoginForm = () => {
             username,
             password
         }, (user) => {
+            console.log(user)
             context.logIn(user)
             history.push('/')
         }, (err) => {
