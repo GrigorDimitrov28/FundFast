@@ -1,10 +1,10 @@
 function username(username) {
-    const usernameRegex = new RegExp("^[a-zA-Z\\d]+$", "g")
+    const usernameRegex = new RegExp("^[a-zA-Z\\d]{4,15}$", "g")
 
     if (username.length < 4) {
-        `Username must be at least 4 characters long.`
+        return `Username must be at least 4 characters long.`
     } else if (username.length > 15) {
-        `Username must be maximum 15 characters long.`
+        return `Username must be maximum 15 characters long.`
     } else if (!usernameRegex.test(username)) {
         return `Username can contain only letters and digits.`
     } else {
