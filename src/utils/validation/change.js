@@ -5,6 +5,9 @@ function handleChange(e, type, obj, password) {
     const linkRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
     const descriptionRegex = /^[a-zA-Z\d.!,\s?"'`-]{300,1000}$/
 
+    //TOTO: fix money regex
+    const moneyRegex = /^[0-9]+(\.[0-9]{1,2})?$/
+
     obj.value = e.target.value
     if (type === "user" && usernameRegex.test(obj.value)) {
         obj.errorMsg = ""
@@ -27,6 +30,10 @@ function handleChange(e, type, obj, password) {
 
         return obj
     } else if (type === "description" && descriptionRegex.test(obj.value)) {
+        obj.errorMsg = ""
+
+        return obj
+    } else if (type === "money" && moneyRegex.test(obj.value)){
         obj.errorMsg = ""
 
         return obj

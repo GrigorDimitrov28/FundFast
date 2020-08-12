@@ -44,7 +44,9 @@ const App = (props) => {
       if (response.status) {
         logIn({
           username: response.user.username,
-          id: response.user._id
+          id: response.user._id,
+          image: response.user.image,
+          email: response.user.email
         })
       } else {
         logOut()

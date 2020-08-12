@@ -97,10 +97,15 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { username, password } = req.body;
-        models.User.update({ _id: id }, { username, password })
+        if(req.body.money){
+            models.User.findOneAndUpdate({_id: id}, {$inc : {'money' : req.body.money}})
             .then((updatedUser) => res.send(updatedUser))
             .catch(next)
+        }else{
+            models.User.updateOne({ _id: id }, req.body)
+            .then((updatedUser) => res.send(updatedUser))
+            .catch(next)
+        }
     },
 
     delete: (req, res, next) => {

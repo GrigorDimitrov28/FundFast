@@ -50,7 +50,7 @@ const RegisterForm = () => {
             history.push('/500')
         })
 
-        if(auth.usernameError || auth.passwordError || auth.rePasswordError){
+        if(auth && (auth.usernameError || auth.passwordError || auth.rePasswordError)){
             setUser({ ...user, errorMsg: auth.usernameError })
             setPassword({ ...password, errorMsg: auth.passwordError })
             setRePassword({ ...rePassword, errorMsg: auth.rePasswordError })

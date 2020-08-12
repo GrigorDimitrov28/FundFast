@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect , useState} from 'react'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
 import styles from './index.module.css'
@@ -6,6 +6,17 @@ import { Link } from 'react-router-dom'
 import UserContext from '../../Context'
 const AccountInfo = () => {
     const context = useContext(UserContext)
+    const [user, setUser] = useState({})
+    const [isLoaded, setLoaded] = useState(false)
+    const defaultImageLink = 'https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+    useEffect(() => {
+        fetch(`http://localhost:9999/api/user?id=${context.user.id}`).then(data => data.json())
+        .then(response => {
+            setUser(response)
+            setLoaded(true)
+        })
+        .catch(err => console.log(err))
+    },[])
 
     return (
         <div className={styles.content}>
@@ -19,9 +30,11 @@ const AccountInfo = () => {
             </div>
             <div className={styles.mainContent}>
                 <div className={styles.leftContent}>
-                    <h1>{context.user.username}</h1>
-                    <img className={context.profilePicture ? styles.profilePicture : styles.defaultProfilePicture} 
-                    src={context.profilePicture ? context.profilePicture : 'https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'}/>
+                    <h1>{user.username}</h1>
+                    <h3>{user.email}</h3>
+                    <img className={user.image ? styles.profilePicture : styles.defaultProfilePicture} 
+                    src={isLoaded ? (user.image ? user.image : defaultImageLink) : ''}
+                    alt="profile"/>
                 </div>
                 <div className={styles.rightContent}>
                     <h2>My stats: </h2>
