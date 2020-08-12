@@ -20,7 +20,8 @@ const authenticate = async (url, body, onSuccess, onFailure, onServerFailure, on
                 username: response.username,
                 id: response._id,
                 email: response.email,
-                image: response.image
+                image: response.image,
+                money: response.money
             })
         } else {
             onFailure()
