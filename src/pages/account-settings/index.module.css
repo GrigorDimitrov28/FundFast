@@ -1,6 +1,6 @@
 .content {
     margin-top: 1rem;
-    height: 45rem;
+    height: 48rem;
     width: 100%;
 }
 
@@ -67,11 +67,15 @@
     cursor: pointer;
     height: 3rem; 
     background: white;
-    border: px solid rgb(116, 58, 80);
+    border: 2px solid rgb(116, 58, 80);
     color: rgb(116, 58, 80);
     outline: none;
     border-radius: 5px;
     font-size: 1.2rem;
+}
+
+.submit:disabled{
+    border: 2px solid rgb(116, 58, 80);
 }
 
 .submit:hover {
@@ -120,4 +124,19 @@
     display: block;
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+.formInput {
+    height: 1rem;
+}
+
+.e {
+    display: flex;
+    flex-direction: column;
+}
+
+.e p {
+    color: red;
+    margin-left: 2rem;
+    margin-bottom: -1rem;
 }

@@ -1,14 +1,15 @@
-function handleChange(e, type, obj, password) {
+function handleChange(e, type, obj, password, subscribeType) {
     const usernameRegex = new RegExp("^[a-zA-Z\\d]{4,15}$", "g")
     const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", "g")
     const fundraiserNameRegex = new RegExp("^[a-zA-Z.!?\"'`-]{6,30}$", "g")
     const linkRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
     const descriptionRegex = /^[a-zA-Z\d.!,\s?"'`-]{300,1000}$/
-
+    const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
     //TOTO: fix money regex
     const moneyRegex = /^[0-9]+(\.[0-9]{1,2})?$/
+    const val = e.target.value === 'true' ? false : true
 
-    obj.value = e.target.value
+    type!== 'subscribe' ? obj.value = e.target.value : obj.value[subscribeType] = val
     if (type === "user" && usernameRegex.test(obj.value)) {
         obj.errorMsg = ""
 
@@ -37,8 +38,11 @@ function handleChange(e, type, obj, password) {
         obj.errorMsg = ""
 
         return obj
+    } else if (type === "email" && emailRegex.test(obj.value)){
+        obj.errorMsg = ""
+        
+        return obj
     }
-
     return obj
 }
 

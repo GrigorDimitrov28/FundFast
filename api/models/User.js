@@ -29,6 +29,10 @@ const userSchema = new Schema({
     money: {
         type: Number,
         default: 0
+    },
+
+    subscriptions: {
+        type: Object
     }
 })
 

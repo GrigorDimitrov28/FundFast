@@ -50,12 +50,21 @@
     display: block;
 }
 
+.leftContent {
+    width: 30rem;
+}
+
 .leftContent h1 {
     padding-bottom: 1rem;
 }
 
 .leftContent h3 {
     padding-bottom: 1rem;
+}
+
+.leftContent img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .rightContent {
