@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import Navbar from '../../components/navigation'
@@ -27,7 +27,7 @@ const RegisterForm = () => {
         value: '',
         errorMsg: ''
     })
-
+    const [isButtonDisabled, setDisabled] = useState(true)
     const [isProcessing, setProcessing] = useState(false)
 
     const context = useContext(UserContext)
@@ -54,8 +54,17 @@ const RegisterForm = () => {
             setUser({ ...user, errorMsg: auth.usernameError })
             setPassword({ ...password, errorMsg: auth.passwordError })
             setRePassword({ ...rePassword, errorMsg: auth.rePasswordError })
+            setProcessing(false)
         }
     }
+    
+    useEffect(() => {
+        if(user.value && password.value && rePassword.value
+            && !user.errorMsg && !password.errorMsg && !rePassword.errorMsg
+            && !isProcessing) {
+                setDisabled(false)
+            }
+    }, [user, password, rePassword, isProcessing])
 
     return (
         <div className={styles.wrapper}>
@@ -87,13 +96,7 @@ const RegisterForm = () => {
                     <p className={styles.error}> {rePassword.errorMsg} </p>
 
                     <button type="submit"
-                        disabled={user.errorMsg
-                            || password.errorMsg
-                            || rePassword.errorMsg
-                            || isProcessing
-                            || !user.value
-                            || !password.value
-                            || !rePassword.value}
+                        disabled={isButtonDisabled}
                         className={styles.submit}>
                         Sign Up
                         </button>

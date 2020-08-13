@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
 import styles from './index.module.css'
@@ -38,8 +38,28 @@ const AccountSettings = () => {
         },
         errorMsg: ''
     })
+    const [isProcessing, setProcessing] = useState(false)
+    const [isMoneyButtonDisabled, setMoneyDisabled] = useState(true)
+    const [isEmailButtonDisabled, setEmailDisabled] = useState(true)
+    const [isImageButtonDisabled, setImageDisabled] = useState(true)
 
+    useEffect(() => {
+        if(money.value && !money.errorMsg && !isProcessing){
+            setMoneyDisabled(false)
+        }
+    }, [money, isProcessing])
+    useEffect(() => {
+        if(email.value && !email.errorMsg && !isProcessing){
+            setEmailDisabled(false)
+        }
+    }, [email, isProcessing])
+    useEffect(() => {
+        if(image.value && !image.errorMsg && !isProcessing){
+            setImageDisabled(false)
+        }
+    }, [image, isProcessing])
     const handleClick = async (obj, type) => {
+        setProcessing(true)
         const objValue = obj.value
         const request = await fetch(`http://localhost:9999/api/user/${context.user.id}`, {
             method: 'PUT',
@@ -51,8 +71,14 @@ const AccountSettings = () => {
             }
         })
         const response = await request.json()
-        console.log(response)
-        history.push('/account-info')
+        if (response.imageError || response.emailError || response.moneyError) {
+            setImage({...image, errorMsg: response['imageError']})
+            setEmail({...email, errorMsg: response['emailError']})
+            setMoney({...money, errorMsg: response['moneyError']})
+            setProcessing(false)
+        } else {
+            history.push('/account-info')
+        }
     }
 
     return (
@@ -78,7 +104,7 @@ const AccountSettings = () => {
                             <p>{image.errorMsg}</p>
                         </div>
                         <button className={styles.submit}
-                            disabled={image.value === '' || image.errorMsg}
+                            disabled={isImageButtonDisabled}
                             onClick={() => handleClick(image, 'image')}>
                             Change photo
                         </button>
@@ -95,12 +121,12 @@ const AccountSettings = () => {
                                 value={money.value}
                                 onChange={(e) => { setMoney({ ...changeHandler(e, 'money', money) }) }}
                                 onBlur={() => setMoney({ ...handlebBlurMoney(money) })} />
-                                <p>{money.errorMsg}</p>
+                            <p>{money.errorMsg}</p>
                         </div>
 
                         <button className={styles.submit}
                             onClick={() => handleClick(money, 'money')}
-                            disabled={money.value === '' || money.errorMsg}>
+                            disabled={isMoneyButtonDisabled}>
                             Deposit
                         </button>
                     </div>
@@ -109,17 +135,17 @@ const AccountSettings = () => {
                     <h2>Add email: </h2>
                     <div className={styles.changeInput}>
                         <div className={styles.e}>
-                        <input placeholder="Email"
-                            type="text"
-                            value={email.value}
-                            onChange={(e) => { setEmail({ ...changeHandler(e, 'email', email) }) }}
-                            onBlur={() => setEmail({... handleBlurEmail(email)})} />
+                            <input placeholder="Email"
+                                type="text"
+                                value={email.value}
+                                onChange={(e) => { setEmail({ ...changeHandler(e, 'email', email) }) }}
+                                onBlur={() => setEmail({ ...handleBlurEmail(email) })} />
                             <p>{email.errorMsg}</p>
                         </div>
-                        
-                            
+
+
                         <button className={styles.submit}
-                            disabled={email.value === '' || email.errorMsg}
+                            disabled={isEmailButtonDisabled}
                             onClick={() => handleClick(email, 'email')}>
                             Submit email
                         </button>

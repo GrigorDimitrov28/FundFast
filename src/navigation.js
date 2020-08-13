@@ -26,14 +26,14 @@ const LazyNavigation = () => {
             <Switch>
                 <Suspense fallback={<h1>Loading..</h1>}>
                     <Route path="/" exact component={context.loggedIn ? LazyUserHomePage : LazyHomePage} />
-                    <Route path="/register" component={context.loggedIn ? LazyUnauthAccessPage : LazyRegisterPage} />
+                    <Route path="/register" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyRegisterPage} />
                     <Route path="/login" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyLoginPage} />
-                    <Route path="/about" component={LazyAboutPage} />
-                    <Route path="/create-fundraiser" component={LazyCreateFundraiserPage} />
-                    <Route path="/500" component={LazyServerErrorPage} />
-                    <Route path="/account-settings" component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfileSettingsPage} />
-                    <Route path="/account-info" component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfilePage} />
-                    <Route path="" component={LazyUnauthAccessPage} />
+                    <Route path="/about" exact component={LazyAboutPage} />
+                    <Route path="/create-fundraiser" exact component={LazyCreateFundraiserPage} />
+                    <Route path="/500" exact component={LazyServerErrorPage} />
+                    <Route path="/account-settings" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfileSettingsPage} />
+                    <Route path="/account-info" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfilePage} />
+                    {/* <Route component={LazyUnauthAccessPage} /> */}
                 </Suspense>
             </Switch>
         </BrowserRouter>

@@ -12,6 +12,7 @@ const authenticate = async (url, body, onSuccess, onFailure, onServerFailure, on
         document.cookie = `x-auth-token=${authToken}`
 
         const response = await data.json()
+        console.log('RESPONSE ----> ', response)
         if(response.usernameError || response.passwordError || response.rePasswordError){
             return response
         }

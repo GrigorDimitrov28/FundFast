@@ -10,9 +10,9 @@ module.exports = {
     },
 
     post: {
-        register: (req, res, next) => {
+        register: async (req, res, next) => {
             const { username, password, rePassword } = req.body;
-            const usernameError = utils.validate.username(username)
+            const usernameError = await utils.validate.username(username, 'register')
             const passwordError = utils.validate.password(password)
             const rePasswordError = utils.validate.rePassword(rePassword, password)
 
@@ -53,7 +53,6 @@ module.exports = {
                         });
                 })
                 .catch(err => {
-                    if (!redirectAuthenticated) { next(); return; }
 
                     if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
                         res.status(401).send('UNAUTHORIZED!');
@@ -66,11 +65,10 @@ module.exports = {
                 })
         },
 
-        login: (req, res, next) => {
+        login: async (req, res, next) => {
             const { username, password } = req.body
-            const usernameError = utils.validate.username(username)
+            const usernameError = await utils.validate.username(username, 'login')
             const passwordError = utils.validate.password(password)
-
             if (usernameError || passwordError) {
                 res.send({
                     usernameError,
@@ -81,7 +79,10 @@ module.exports = {
                     .then((user) => Promise.all([user, user.matchPassword(password)]))
                     .then(([user, match]) => {
                         if (!match) {
-                            res.status(401).send('Invalid password');
+                            res.send({
+                                usernameError: 'Invalid credentials',
+                                passwordError: 'Invalid credentials'
+                            });
                             return;
                         }
 
@@ -108,9 +109,33 @@ module.exports = {
     put: (req, res, next) => {
         const id = req.params.id;
         if (req.body.money) {
-            models.User.findOneAndUpdate({ _id: id }, { $inc: { 'money': req.body.money } })
+            const moneyError = utils.validate.depositMoney(req.body.money)
+            if (moneyError) {
+                res.send({ moneyError })
+            } else {
+                models.User.findOneAndUpdate({ _id: id }, { $inc: { 'money': req.body.money } })
+                    .then((updatedUser) => res.send(updatedUser))
+                    .catch(next)
+            }
+        } else if(req.body.email){
+            const emailError = utils.validate.email(req.body.email)
+            if(emailError){
+                res.send({emailError})
+            }else{
+                models.User.updateOne({ _id: id }, req.body)
+                .then((updatedUser) => res.send(updatedUser))
+                .catch(next)    
+            }
+        } else if(req.body.image){
+            const imageError = utils.validate.imageLink(req.body.image)
+            console.log(imageError)
+            if(imageError){
+                res.send({imageError})
+            }else{
+                models.User.updateOne({ _id: id }, req.body)
                 .then((updatedUser) => res.send(updatedUser))
                 .catch(next)
+            }
         } else {
             models.User.updateOne({ _id: id }, req.body)
                 .then((updatedUser) => res.send(updatedUser))

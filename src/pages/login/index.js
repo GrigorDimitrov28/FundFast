@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
@@ -22,6 +22,7 @@ const LoginForm = () => {
     })
 
     const [isProcessing, setProcessing] = useState(false)
+    const [isButtonDisabled, setDisabled] = useState(true)
 
     const context = useContext(UserContext)
     const history = useHistory()
@@ -29,7 +30,7 @@ const LoginForm = () => {
         e.preventDefault()
         setProcessing(true)
         
-        const auth = await authenticate('http://localhost:9999/api/user/register', {
+        const auth = await authenticate('http://localhost:9999/api/user/login', {
             username,
             password: pass
         }, (user) => {
@@ -41,12 +42,19 @@ const LoginForm = () => {
         }, () => {
             history.push('/500')
         })
-
         if(auth && (auth.usernameError || auth.passwordError)){
             setUser({ ...user, errorMsg: auth.usernameError })
             setPassword({ ...password, errorMsg: auth.passwordError })
+            setProcessing(false)
         }
     }
+
+    useEffect(() => {
+        if(user.value && password.value && !user.errorMsg && !password.errorMsg
+            && !isProcessing){
+                setDisabled(false)
+            }
+    }, [user, password, isProcessing])
 
     return (
         <div className={styles.wrapper}>
@@ -70,11 +78,7 @@ const LoginForm = () => {
                     <p className={styles.error}> {password.errorMsg} </p>
 
                     <button type="submit"
-                        disabled={user.errorMsg
-                            || password.errorMsg
-                            || isProcessing
-                            || !user.value
-                            || !password.value}
+                        disabled={isButtonDisabled}
                         className={styles.submit}>
                         Sign In
                         </button>

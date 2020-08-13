@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
@@ -32,9 +32,11 @@ const CreateForm = () => {
         value: '',
         errorMsg: ''
     })
-
+    const [isProcessing, setProcessing] = useState(false)
+    const [isButtonDisabled, setDisabled] = useState(true)
     async function handleSubmit(e) {
         e.preventDefault()
+        setProcessing(true)
         const fundraiser = {
             name: name.value,
             category: category.value,
@@ -51,19 +53,34 @@ const CreateForm = () => {
                 }
             })
             const response = await data.json()
-
-            if(response._id){
+            if (response.nameError || response.categoryError || response.descriptionError || response.imageError) {
+                setName({ ...name, errorMsg: response['nameError'] })
+                setImage({ ...image, errorMsg: response['imageError'] })
+                setCategory({ ...category, errorMsg: response['categoryError'] })
+                setDescription({ ...description, errorMsg: response['descriptionError'] })
+                setProcessing(false)
+            } else if (response._id) {
                 console.log(response)
                 history.push('/')
-            }else {
+            } else {
                 history.push('/500')
             }
-            
+
         } catch (e) {
+            setProcessing(false)
             history.push('/500')
         }
 
     }
+
+    useEffect(() => {
+        if(name.value && category.value && description.value && image.value
+            && !name.errorMsg && !category.errorMsg && !description.errorMsg && !image.errorMsg
+            && !isProcessing){
+                setDisabled(false)
+            }
+    }, [name, category, image, description, isProcessing])
+    
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
@@ -108,14 +125,7 @@ const CreateForm = () => {
 
                     <button type="submit"
                         className={styles.submit}
-                        disabled={name.errorMsg
-                            || category.errorMsg
-                            || image.errorMsg
-                            || description.errorMsg
-                            || !name.value
-                            || !category.value
-                            || !image.value
-                            || !description.value}>
+                        disabled={isButtonDisabled}>
                         Create fundraiser
                         </button>
                 </form >
