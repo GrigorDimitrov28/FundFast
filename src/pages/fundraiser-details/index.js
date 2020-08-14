@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import styles from './index.module.css'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/input'
 import changeHandler from '../../utils/validation/change'
 import moneyBlurHandler from '../../utils/validation/money'
 import UserContext from '../../Context'
+
 const Content = () => {
     const id = window.location.href.replace('http://localhost:3000/fundraiser/', '')
     const [fundraiser, setFundraiser] = useState({})
@@ -35,6 +34,12 @@ const Content = () => {
             const data = await post.json()
             if (data._id) {
                 console.log(data)
+                let don = data.donations
+                don = don.toFixed(2)
+                data.donations = don
+                don = data.money
+                don = don.toFixed(2)
+                data.money = don
                 const author = await getAuthor(data.author)
                 setAuthor(author)
                 setFundraiser(data)
@@ -44,7 +49,7 @@ const Content = () => {
         }
         getFundraiser()
 
-    }, [history])
+    }, [history, id])
 
     const calcWidth = (needed, donated) => {
         if (donated === 0) {
@@ -59,13 +64,15 @@ const Content = () => {
     }
 
     const handleClick = () => {
-        if(context.user.money < money.value){
-            setMoney({...money, errorMsg: 'Account balance too low'})
-        }else {
-            fetch(`http://localhost:9999/api/fundraiser/donate/donator=${context.user.username}/fId=${id}`, {
+        if (context.user.money < money.value) {
+            setMoney({ ...money, errorMsg: 'Account balance too low' })
+        } else {
+            fetch(`http://localhost:9999/api/fundraiser/donate`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     donation: money.value,
+                    uId: context.user.id,
+                    fId: fundraiser._id
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -99,15 +106,15 @@ const Content = () => {
                         </div>
                         <p>Money needed: {fundraiser.money}$</p>
                     </div>
-                    <div className={styles.fundButtons}>
-                        <Input placeholder="Donate" 
-                        type="text"
-                        value={money.value}
-                        onChange={(e) => setMoney({...changeHandler(e, 'money', money)})}
-                        onBlur={() => setMoney({...moneyBlurHandler(money)})}/>
+                    {context.loggedIn && <div className={styles.fundButtons}>
+                        <Input placeholder="Donate"
+                            type="text"
+                            value={money.value}
+                            onChange={(e) => setMoney({ ...changeHandler(e, 'money', money) })}
+                            onBlur={() => setMoney({ ...moneyBlurHandler(money) })} />
                         <button onClick={() => handleClick()}>Donate</button>
-                    </div>
-                    <p className={styles.error}>{money.errorMsg}</p>
+                    </div>}
+                    {context.loggedIn && <p className={styles.error}>{money.errorMsg}</p>}
                 </div>
             </div>
             <div className={styles.fundraiserDescription}>
@@ -120,11 +127,7 @@ const Content = () => {
 const DetailsPage = () => {
 
     return (
-        <div>
-            <Navbar />
-            <Content />
-            <Footer />
-        </div>
+        <Content />
     )
 }
 

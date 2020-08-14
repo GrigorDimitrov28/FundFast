@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import styles from './index.module.css'
 import Input from '../../components/input'
 import { Link } from 'react-router-dom'
-import handleChange from '../../utils/validation/change'
-import handleBlurCategory from '../../utils/validation/category'
-import handleBlurName from '../../utils/validation/fundraiser-name'
-import handleBlurLink from '../../utils/validation/link'
-import handleBlurDescription from '../../utils/validation/description'
-import handleBlurMoney from '../../utils/validation/money'
+import * as validator from '../../utils/validation'
 import userContext from '../../Context'
+
 const CreateForm = () => {
     const history = useHistory()
     const context = useContext(userContext)
@@ -62,13 +56,13 @@ const CreateForm = () => {
                 }
             })
             const response = await data.json()
-            if (response.nameError || response.categoryError 
+            if (response.nameError || response.categoryError
                 || response.descriptionError || response.imageError || response.moneyError) {
                 setName({ ...name, errorMsg: response['nameError'] })
                 setImage({ ...image, errorMsg: response['imageError'] })
                 setCategory({ ...category, errorMsg: response['categoryError'] })
                 setDescription({ ...description, errorMsg: response['descriptionError'] })
-                setMoney({...money, errorMsg: response['moneyError']})
+                setMoney({ ...money, errorMsg: response['moneyError'] })
                 setProcessing(false)
             } else if (response._id) {
                 console.log(response)
@@ -99,9 +93,10 @@ const CreateForm = () => {
                 <form className={styles.loginForm}
                     onSubmit={(e) => handleSubmit(e)}>
                     <Input name="fundraiser-name"
+                        className="loginInput"
                         type="text"
-                        onChange={((e) => setName({ ...handleChange(e, 'fundraiser', name) }))}
-                        onBlur={() => setName({ ...handleBlurName(name) })}
+                        onChange={((e) => setName({ ...validator.change(e, 'fundraiser', name) }))}
+                        onBlur={() => setName({ ...validator.fundName(name) })}
                         value={name.value}
                         placeholder="Fundraiser name" />
                     <p className={styles.error}> {name.errorMsg} </p>
@@ -109,7 +104,7 @@ const CreateForm = () => {
                     <select value={category.value}
                         className={styles.select}
                         onChange={(e) => setCategory({ value: e.target.value, errorMsg: '' })}
-                        onBlur={() => setCategory({ ...handleBlurCategory(category) })}>
+                        onBlur={() => setCategory({ ...validator.category(category) })}>
                         <option hidden value="Category"> Category </option>
                         <option value="Donations">Donations</option>
                         <option value="Campaigns">Campaigns</option>
@@ -119,26 +114,28 @@ const CreateForm = () => {
                     <p className={styles.error}> {category.errorMsg} </p>
 
                     <Input name="img-link"
+                        className="loginInput"
                         type="text"
                         value={image.value}
-                        onChange={((e) => setImage({ ...handleChange(e, 'money', image) }))}
-                        onBlur={() => setImage({ ...handleBlurLink(image) })}
+                        onChange={((e) => setImage({ ...validator.change(e, 'money', image) }))}
+                        onBlur={() => setImage({ ...validator.link(image) })}
                         placeholder="Image link" />
                     <p className={styles.error}> {image.errorMsg} </p>
-                    
+
                     <Input name="money"
+                        className="loginInput"
                         type="text"
                         value={money.value}
-                        onChange={((e) => setMoney({ ...handleChange(e, 'money', money) }))}
-                        onBlur={() => setMoney({ ...handleBlurMoney(money) })}
+                        onChange={((e) => setMoney({ ...validator.change(e, 'money', money) }))}
+                        onBlur={() => setMoney({ ...validator.money(money) })}
                         placeholder="Funds needed" />
                     <p className={styles.error}> {money.errorMsg} </p>
 
                     <textarea placeholder="Description"
                         className={styles.textarea}
                         value={description.value}
-                        onChange={((e) => setDescription({ ...handleChange(e, 'description', description) }))}
-                        onBlur={() => setDescription({ ...handleBlurDescription(description) })}
+                        onChange={((e) => setDescription({ ...validator.change(e, 'description', description) }))}
+                        onBlur={() => setDescription({ ...validator.description(description) })}
                     />
                     <p className={styles.error}> {description.errorMsg} </p>
 
@@ -159,11 +156,7 @@ const CreateForm = () => {
 
 const CreateFundraiserPage = () => {
     return (
-        <div>
-            <Navbar />
-            <CreateForm />
-            <Footer />
-        </div>
+        <CreateForm />
     )
 }
 

@@ -1,5 +1,5 @@
 const handleBlurEmail = (email) => {
-    const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
+    const emailRegex = /^[^@\s]+@[^@\s.]+.[^@.\s]+$/
 
     if(email.value === ''){
         email.errorMsg = 'Field cannot be empty.'

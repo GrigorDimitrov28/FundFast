@@ -1,8 +1,6 @@
 import React from 'react'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import { useHistory } from 'react-router-dom'
-import './500.css'
+import './404.css'
 
 const Content = () => {
     const history = useHistory()
@@ -12,25 +10,21 @@ const Content = () => {
     }
 
     return (
-        <div >
-            <div id="container-500">
-                <img id="left-500" src="./error.png" alt="error" />
-                <h1 id="h1-500">404</h1>
-                <img id="right-500" src="./error.png" alt="error" />
+        <div id="content-404">
+            <div id="container-404">
+                <img id="left-404" src="./error.png" alt="error" />
+                <h1 id="h1-404">404</h1>
+                <img id="right-404" src="./error.png" alt="error" />
             </div>
-            <h2 id="h2-500">Content not found<b>:(</b></h2>
-            <button id="button-500" onClick={handleClick}>Try again.</button>
+            <h2 id="h2-404">Content not found<b>:(</b></h2>
+            <button id="button-404" onClick={handleClick}>Try again.</button>
         </div>
     )
 }
 
 const LazyServerErrorPage = () => {
     return (
-        <div>
-            <Navbar />
-            <Content />
-            <Footer type={"sticky"}/>
-        </div>
+        <Content />
     )
 }
 

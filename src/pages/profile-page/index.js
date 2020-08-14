@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 import UserContext from '../../Context'
@@ -14,7 +12,7 @@ const AccountInfo = () => {
         fetch(`http://localhost:9999/api/user?id=${context.user.id}`).then(data => data.json())
             .then(response => {
                 response.money = response.money.toFixed(2)
-
+                context.user.money = response.money
                 setUser(response)
                 setLoaded(true)
             })
@@ -55,11 +53,7 @@ const AccountInfo = () => {
 }
 const ProfilePage = () => {
     return (
-        <div>
-            <Navbar />
-            <AccountInfo />
-            <Footer />
-        </div>
+        <AccountInfo />
     )
 }
 

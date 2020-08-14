@@ -13,8 +13,8 @@ const Card = ({ id ,image, name, category, description }) => {
             style={{'backgroundImage': `url(${image})`}} 
             onClick={(e) => clickHandler(e)}/>
             <div className={styles.container}>
-                <h3><b>{name}</b></h3>
-                <h4>{category}</h4>
+                <h3 className={styles.name}><b>{name}</b></h3>
+                <h4 className={styles.category}>{category}</h4>
                 <p>{description}</p>
                 <Link to={`/fundraiser/${id}`}>Details</Link>
             </div>

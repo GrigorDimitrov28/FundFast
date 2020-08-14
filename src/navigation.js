@@ -1,11 +1,12 @@
-import React, { Suspense, useContext } from 'react'
+import React, { useContext } from 'react'
 import UserContext from './Context'
 import {
     BrowserRouter,
     Switch,
-    Route,
-    Redirect
+    Route
 } from 'react-router-dom'
+import Navbar from './components/navigation'
+import Footer from './components/footer'
 
 const LazyHomePage = React.lazy(() => import('./pages/home'))
 const LazyRegisterPage = React.lazy(() => import('./pages/register'))
@@ -19,26 +20,30 @@ const LazyProfileSettingsPage = React.lazy(() => import('./pages/account-setting
 const LazyUnauthAccessPage = React.lazy(() => import('./pages/401'))
 const LazyDetailsPage = React.lazy(() => import('./pages/fundraiser-details'))
 const LazyNotFoundPage = React.lazy(() => import('./pages/404'))
+
 const LazyNavigation = () => {
+
     const context = useContext(UserContext)
 
     return (
         <BrowserRouter>
+            <Navbar />
             <Switch>
-                <Suspense fallback={<h1>Loading..</h1>}>
-                    <Route path="/" exact component={context.loggedIn ? LazyUserHomePage : LazyHomePage} />
-                    <Route path="/register" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyRegisterPage} />
-                    <Route path="/login" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyLoginPage} />
-                    <Route path="/about" exact component={LazyAboutPage} />
-                    <Route path="/create-fundraiser" exact component={LazyCreateFundraiserPage} />
-                    <Route path="/500" exact component={LazyServerErrorPage} />
-                    <Route path="/404" exact component={LazyNotFoundPage} />
-                    <Route path="/account-settings" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfileSettingsPage} />
-                    <Route path="/account-info" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfilePage} />
-                    <Route path="/fundraiser/" component={LazyDetailsPage} />
-                    {/* <Route component={LazyUnauthAccessPage} /> */}
-                </Suspense>
+                <Route path="/" exact component={context.loggedIn ? LazyUserHomePage : LazyHomePage} />
+                <Route path="/register" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyRegisterPage} />
+                <Route path="/login" exact component={context.loggedIn ? LazyUnauthAccessPage : LazyLoginPage} />
+                <Route path="/about" exact component={LazyAboutPage} />
+                <Route path="/create-fundraiser" exact component={LazyCreateFundraiserPage} />
+                <Route path="/500" exact component={LazyServerErrorPage} />
+                <Route path="/404" exact component={LazyNotFoundPage} />
+                <Route path="/401" exact component={LazyUnauthAccessPage} />
+                <Route path="/account-settings" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfileSettingsPage} />
+                <Route path="/account-info" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfilePage} />
+                <Route path="/fundraiser/" component={LazyDetailsPage} />
+                <Route path="" component={LazyNotFoundPage} />
+
             </Switch>
+            <Footer />
         </BrowserRouter>
     )
 }

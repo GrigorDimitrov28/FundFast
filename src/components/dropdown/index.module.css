@@ -22,7 +22,7 @@
 .container {
   display:inline;
 }
-/* Dropdown Menu */
+
 @keyframes fadein {
   from {opacity: 0}
   to {opacity: 1}
@@ -60,7 +60,7 @@
 
 .dropdown-item:hover {
   color: rgb(116, 58, 80);
-  background-color:  #f2f2f2;
+  background-color:  rgb(116, 58, 80, 0.1);
 }
 
 .menu {

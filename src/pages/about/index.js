@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import styles from './index.module.css'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import { AboutHeaderPhoto } from '../../components/img-under-nav'
 import UserContext from '../../Context'
 
@@ -30,7 +28,7 @@ const Content = () => {
                 product on the market. The choice is yours.
                 </p>
                 <img className={styles.funds} src="./funds.png" alt="funds-raised" />
-                <h3 className={styles.dynamic}>0$ raised</h3>
+                <h3 className={styles.dynamic}>0 Users</h3>
             </div>
 
             <h2>How does FundFast work?</h2>
@@ -78,12 +76,10 @@ const AboutPage = () => {
 
     return (
         <div>
-            <Navbar />
             <AboutHeaderPhoto btnText={context.loggedIn ? 'Add fundraiser' : 'Sign Up'}
             href={context.loggedIn ? '/create-fundraiser' : '/register'}
             pText={context.loggedIn ? 'Add a fundraiser and make your change.' : 'Join us now and make your change.'}/>
             <Content />
-            <Footer />
         </div>
     )
 }

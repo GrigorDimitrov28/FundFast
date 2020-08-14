@@ -51,16 +51,6 @@
     margin-top: 3rem;
 }
 
-input:not(.formInput){
-    padding-left: 0.5rem;
-    margin-left: 2rem;
-    width: 24rem;
-    height: 2.5rem;
-    border-color: black;
-    border: 0.1rem solid black;
-    outline: none;
-}
-
 .submit {
     display: block;
     margin-left: 7rem;
@@ -97,7 +87,7 @@ input:not(.formInput){
     cursor: pointer;
     height: 3rem; 
     background: white;
-    border: px solid rgb(116, 58, 80);
+    border: 2px solid rgb(116, 58, 80);
     color: rgb(116, 58, 80);
     outline: none;
     border-radius: 5px;

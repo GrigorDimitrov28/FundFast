@@ -42,12 +42,10 @@
 }
 
 .profilePicture {
+    display: block;
+    border-radius: 10px;
     height: 10rem;
     max-width: 100%;
-}
-
-.profilePicture {
-    display: block;
 }
 
 .leftContent {

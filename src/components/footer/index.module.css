@@ -2,7 +2,7 @@ footer {
     /* position: absolute;
     bottom: 0; */
     width: 100vw;
-    background-color: #EAEAEA;
+    background-color: rgb(116, 58, 80, 0.1);
     display: flex;
     flex-direction: column;
 }

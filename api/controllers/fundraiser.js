@@ -3,19 +3,17 @@ const utils = require('../utils')
 
 module.exports = {
     donate: async (req, res, nex) => {
-        const donator = req.params.donator.replace('donator=', '')
-        const fundraiserId = req.params.fId.replace('fId=', '')
-        console.log(typeof donator, typeof fundraiserId)
-        const { donation } = req.body
+        const { donation, uId, fId } = req.body
+        
         const moneyError = utils.validate.depositMoney(donation)
-        const user = await models.User.findById({donator}).then(data => data.json())
+        const user = await models.User.findById(uId)
         if(user.money < donation ){
             res.send({moneyError: 'Account balance too low.'})
         }else if(moneyError){
             res.send({moneyError})
         }else {
-            await models.User.findOneAndUpdate({username: donator}, { $inc: { 'money': -donation } })
-            await models.Fundraiser.findOneAndUpdate(fundraiserId, {$inc: {'donations': donation}})
+            await models.User.findByIdAndUpdate(uId, { $inc: { 'money': -donation , 'donated': donation} })
+            await models.Fundraiser.findByIdAndUpdate(fId, {$inc: {'donations': donation}})
             res.send('Donation completed')
         }
     },

@@ -1,18 +1,18 @@
-#h1-500 {
+#h1-404 {
     color: rgb(116, 58, 80);
     margin: 0 0 0 0;
     font-size: 10rem; line-height: 10rem;
     font-weight: 200;
     text-align: center;
 }
-#h2-500 {
+#h2-404 {
     margin: 2rem auto 3rem auto;
     font-size: 1.5rem;
     font-weight: 200;
     text-align: center;
   }
 
-#button-500 {
+#button-404 {
     height: 4.5vw;
     width: 15vw;
 
@@ -29,21 +29,25 @@
     border-radius: 5px;
 }
 
-#container-500 {
+#container-404 {
     display: flex;
     margin: 2rem 0 1rem 0;
 }
 
-#left-500 {
+#left-404 {
     height: 4vw;
     margin-top: 4rem;
     margin-right: 1rem;
     margin-left: auto;
 }
 
-#right-500 {
+#right-404 {
     margin-right: auto;
     height: 4vw;
     margin-left: 1rem;
     margin-top: 4rem;
+}
+
+#content-404 {
+    height: 75vh;
 }

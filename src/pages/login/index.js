@@ -1,15 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import Input from '../../components/input'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
-import handleBlurUsername from '../../utils/validation/username'
-import handleBlurPassword from '../../utils/validation/password'
-import handleChange from '../../utils/validation/change'
+import * as validator from '../../utils/validation'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
+
 const LoginForm = () => {
     const [user, setUser] = useState({
         value: '',
@@ -62,19 +59,21 @@ const LoginForm = () => {
                 <h2 className={styles.login}>Sign In</h2>
                 <form className={styles.loginForm} onSubmit={(e) => handleSubmit(e, user.value, password.value)}>
                     <Input name="username"
+                        className="loginInput"
                         type="text"
                         placeholder="Username"
                         value={user.value}
-                        onBlur={() => setUser({ ...handleBlurUsername(user) })}
-                        onChange={(e) => setUser({ ...handleChange(e, 'user', user) })} />
+                        onBlur={() => setUser({ ...validator.username(user) })}
+                        onChange={(e) => setUser({ ...validator.change(e, 'user', user) })} />
                     <p className={styles.error}> {user.errorMsg} </p>
 
                     <Input name="password"
                         type="text"
+                        className="loginInput"
                         placeholder="Password"
                         value={password.value}
-                        onBlur={() => setPassword({ ...handleBlurPassword(password) })}
-                        onChange={(e) => setPassword({ ...handleChange(e, 'password', password) })} />
+                        onBlur={() => setPassword({ ...validator.password(password) })}
+                        onChange={(e) => setPassword({ ...validator.change(e, 'password', password) })} />
                     <p className={styles.error}> {password.errorMsg} </p>
 
                     <button type="submit"
@@ -101,9 +100,7 @@ const LoginForm = () => {
 const LazyLoginPage = () => {
     return (
         <div className="container">
-            <Navbar />
             <LoginForm />
-            <Footer />
         </div>
     )
 }

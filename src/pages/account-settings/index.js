@@ -1,14 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 import UserContext from '../../Context'
-import changeHandler from '../../utils/validation/change'
 import { useHistory } from 'react-router-dom'
-import linkBlurHandler from '../../utils/validation/link'
-import handlebBlurMoney from '../../utils/validation/money'
-import handleBlurEmail from '../../utils/validation/email'
+import * as validator from '../../utils/validation'
+import Input from '../../components/input'
 
 const AccountSettings = () => {
     const context = useContext(UserContext)
@@ -44,17 +40,17 @@ const AccountSettings = () => {
     const [isImageButtonDisabled, setImageDisabled] = useState(true)
 
     useEffect(() => {
-        if(money.value && !money.errorMsg && !isProcessing){
+        if (money.value && !money.errorMsg && !isProcessing) {
             setMoneyDisabled(false)
         }
     }, [money, isProcessing])
     useEffect(() => {
-        if(email.value && !email.errorMsg && !isProcessing){
+        if (email.value && !email.errorMsg && !isProcessing) {
             setEmailDisabled(false)
         }
     }, [email, isProcessing])
     useEffect(() => {
-        if(image.value && !image.errorMsg && !isProcessing){
+        if (image.value && !image.errorMsg && !isProcessing) {
             setImageDisabled(false)
         }
     }, [image, isProcessing])
@@ -72,9 +68,9 @@ const AccountSettings = () => {
         })
         const response = await request.json()
         if (response.imageError || response.emailError || response.moneyError) {
-            setImage({...image, errorMsg: response['imageError']})
-            setEmail({...email, errorMsg: response['emailError']})
-            setMoney({...money, errorMsg: response['moneyError']})
+            setImage({ ...image, errorMsg: response['imageError'] })
+            setEmail({ ...email, errorMsg: response['emailError'] })
+            setMoney({ ...money, errorMsg: response['moneyError'] })
             setProcessing(false)
         } else {
             history.push('/account-info')
@@ -96,11 +92,12 @@ const AccountSettings = () => {
                     <h2>Add profile picture: </h2>
                     <div className={styles.changeInput}>
                         <div className={styles.e}>
-                            <input placeholder="Image url..."
+                            <Input placeholder="Image url..."
+                                className="loginInput"
                                 type="text"
                                 value={image.value}
-                                onChange={(e) => setImage({ ...changeHandler(e, 'link', image) })}
-                                onBlur={() => setImage({ ...linkBlurHandler(image) })} />
+                                onChange={(e) => setImage({ ...validator.change(e, 'link', image) })}
+                                onBlur={() => setImage({ ...validator.link(image) })} />
                             <p>{image.errorMsg}</p>
                         </div>
                         <button className={styles.submit}
@@ -116,11 +113,12 @@ const AccountSettings = () => {
                     <h2>Deposit money: </h2>
                     <div className={styles.changeInput}>
                         <div className={styles.e}>
-                            <input placeholder="00.00$"
+                            <Input placeholder="00.00$"
+                                className="loginInput"
                                 type="text"
                                 value={money.value}
-                                onChange={(e) => { setMoney({ ...changeHandler(e, 'money', money) }) }}
-                                onBlur={() => setMoney({ ...handlebBlurMoney(money) })} />
+                                onChange={(e) => { setMoney({ ...validator.change(e, 'money', money) }) }}
+                                onBlur={() => setMoney({ ...validator.money(money) })} />
                             <p>{money.errorMsg}</p>
                         </div>
 
@@ -135,11 +133,12 @@ const AccountSettings = () => {
                     <h2>Add email: </h2>
                     <div className={styles.changeInput}>
                         <div className={styles.e}>
-                            <input placeholder="Email"
+                            <Input placeholder="Email"
+                                className="loginInput"
                                 type="text"
                                 value={email.value}
-                                onChange={(e) => { setEmail({ ...changeHandler(e, 'email', email) }) }}
-                                onBlur={() => setEmail({ ...handleBlurEmail(email) })} />
+                                onChange={(e) => { setEmail({ ...validator.change(e, 'email', email) }) }}
+                                onBlur={() => setEmail({ ...validator.email(email) })} />
                             <p>{email.errorMsg}</p>
                         </div>
 
@@ -161,7 +160,7 @@ const AccountSettings = () => {
                                 value={subscribe.value['Donations']}
                                 id="Donations"
                                 onChange={(e) => {
-                                    setSubscribe({ ...changeHandler(e, 'subscribe', subscribe, '', 'Donations') })
+                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Donations') })
                                     console.log(subscribe)
                                 }} />
                             <label htmlFor="Donations">Donations</label>
@@ -171,7 +170,7 @@ const AccountSettings = () => {
                                 id="Campaigns"
                                 value={subscribe.value['Campaigns']}
                                 onChange={(e) => {
-                                    setSubscribe({ ...changeHandler(e, 'subscribe', subscribe, '', 'Campaigns') })
+                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Campaigns') })
                                     console.log(subscribe)
                                 }} />
                             <label htmlFor="Campaigns">Campaigns</label>
@@ -181,7 +180,7 @@ const AccountSettings = () => {
                                 id="Product development"
                                 value={subscribe.value['Product development']}
                                 onChange={(e) => {
-                                    setSubscribe({ ...changeHandler(e, 'subscribe', subscribe, '', 'Product development') })
+                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Product development') })
                                     console.log(subscribe)
                                 }} />
                             <label htmlFor="Product development">Product development</label>
@@ -191,7 +190,7 @@ const AccountSettings = () => {
                                 id="Startups"
                                 value={subscribe.value['Startups']}
                                 onChange={(e) => {
-                                    setSubscribe({ ...changeHandler(e, 'subscribe', subscribe, '', 'Startups') })
+                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Startups') })
                                     console.log(subscribe)
                                 }} />
                             <label htmlFor="Startups">Startups</label>
@@ -214,11 +213,7 @@ const AccountSettings = () => {
 }
 const ProfileSettingsPage = () => {
     return (
-        <div>
-            <Navbar />
-            <AccountSettings />
-            <Footer />
-        </div>
+        <AccountSettings />
     )
 }
 

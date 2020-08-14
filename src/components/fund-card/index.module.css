@@ -1,10 +1,12 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: rgb(95, 95, 95, 0.05);
     transition: 0.3s;
     width: 20%;
     height: 29rem;
     margin:auto;
     margin-top: 1rem;
+    border-radius: 5px;
 }
   
   
@@ -14,25 +16,34 @@
   
   
 .container {
+    height: 65%;
     padding: 2px 16px;
 }
 
 .container p {
+    display: block;
     word-wrap: break-word;
 }
 
+.category {
+    font-style: italic;
+}
+
 .cardImage {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     height: 10rem;
     max-width: 100%;
     background-position: 50% 50%;
     background-size: cover;
     cursor: pointer;
-  background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
 
 .container a {
     display: block;
-    float: right;
+    margin-left: 15rem;
+    margin-top:2rem;
     font-size: 12pt;
     color: rgb(116, 58, 80);
     font-weight: bold;

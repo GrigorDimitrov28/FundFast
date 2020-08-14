@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../../components/navigation'
-import Footer from '../../components/footer'
 import { useHistory } from 'react-router-dom'
 import './500.css'
 
@@ -12,7 +10,7 @@ const Content = () => {
     }
 
     return (
-        <div >
+        <div id="content-500">
             <div id="container-500">
                 <img id="left-500" src="./error.png" alt="error" />
                 <h1 id="h1-500">500</h1>
@@ -26,11 +24,7 @@ const Content = () => {
 
 const LazyServerErrorPage = () => {
     return (
-        <div>
-            <Navbar />
-            <Content />
-            <Footer type={"sticky"}/>
-        </div>
+        <Content />
     )
 }
 

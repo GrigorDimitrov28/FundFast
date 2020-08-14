@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import UserContext from './Context'
 
 function getCookie(name) {
@@ -66,7 +66,9 @@ const App = (props) => {
         logIn: logIn,
         logOut: logOut
       }}>
+        <Suspense fallback={<div><h1>Loading...</h1></div>}>
         {props.children}
+        </Suspense>
       </UserContext.Provider>
     )
   }
