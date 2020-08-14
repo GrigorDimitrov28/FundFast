@@ -38,7 +38,17 @@ const userSchema = new Schema({
     donated: {
         type: Number,
         default: 0
-    }
+    },
+
+    fundraisers: [{
+        type: ObjectId,
+        ref: 'Fundraiser'
+    }],
+
+    blogs: [{
+        type: ObjectId,
+        ref: 'Blog'
+    }]
 })
 
 userSchema.methods = {

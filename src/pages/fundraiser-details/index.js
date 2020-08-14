@@ -94,7 +94,7 @@ const Content = () => {
                     <div className={styles.author}>
                         <p>Posted by: </p>
                         <div className={styles.authorProfilePic}
-                            style={{ 'backgroundImage': `url(${author.image})` }} />
+                            style={{ 'backgroundImage': `url(${author.image || 'https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'})` }} />
                         <p className={styles.authorName}>{author.username}</p>
                     </div>
 

@@ -84,7 +84,7 @@ const AccountSettings = () => {
                     className={styles.firstInternalLink}>My profile</Link>
                 <Link to={'/account-settings'}
                     className={styles.activeLink}>Settings</Link>
-                <Link to={'/'} className={styles.internalLink}>Fundraisers</Link>
+                <Link to={'/account-fundraisers'} className={styles.internalLink}>Fundraisers</Link>
                 <Link to={'/'} className={styles.internalLink}>Blog posts</Link>
             </div>
             <div className={styles.options}>

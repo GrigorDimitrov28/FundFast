@@ -26,7 +26,7 @@ const AccountInfo = () => {
                     className={styles.activeLink}>My profile</Link>
                 <Link to={'/account-settings'}
                     className={styles.internalLink}>Settings</Link>
-                <Link to={'/'} className={styles.internalLink}>Fundraisers</Link>
+                <Link to={'/account-fundraisers'} className={styles.internalLink}>Fundraisers</Link>
                 <Link to={'/'} className={styles.internalLink}>Blog posts</Link>
             </div>
             <div className={styles.mainContent}>

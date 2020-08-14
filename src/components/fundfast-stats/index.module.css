@@ -19,10 +19,11 @@
     display: block;
     margin: auto auto auto auto;
     width: 5%;
-    height: 25%;
+    height: 20%;
 }
 
 .dynamic {
     display: block;
+    font-size: 1rem;
     margin: auto auto auto 0.5rem;
 }

@@ -42,8 +42,7 @@
 
 .container a {
     display: block;
-    margin-left: 15rem;
-    margin-top:2rem;
+    float: right;
     font-size: 12pt;
     color: rgb(116, 58, 80);
     font-weight: bold;

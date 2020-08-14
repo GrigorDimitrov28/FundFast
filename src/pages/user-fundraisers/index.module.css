@@ -1,0 +1,108 @@
+.content {
+    margin-top: 1rem;
+    min-height: 48rem;
+    height: auto;
+    width: 100%;
+}
+
+.internalNav {
+    display: flex;
+    background-color: rgb(116, 58, 80);
+    opacity: 1;
+    height: 3rem;
+    width: 100%;
+}
+
+.activeLink {
+    display: block;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    margin-top: auto;
+    font-style: italic;
+    margin-bottom: auto;
+}
+
+.internalLink{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.firstInternalLink {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 4rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.post {
+    display: flex;
+    margin: 2rem 0 1rem 2rem;
+    width: 40rem;
+    height: 30rem;
+}
+
+.postImage {
+    border-radius: 20px;
+    max-width: 50%;
+    max-height: 55%;
+}
+
+.postCategory {
+    font-style: italic;
+}
+
+.postContent {
+    margin-left: 2rem;
+}
+
+.postDescription {
+    display: block;
+    width: 40rem;
+    height: 5rem;
+    word-wrap: break-word;
+}
+
+.upperPostContent {
+    display: flex;
+}
+
+.leftUpperPostContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.rightUpperPostContent {
+    width: 20rem;
+    display: flex;
+    margin: 1rem 1rem auto 3rem;
+}
+
+.button {
+    display: block;
+    margin: 0 auto 0 auto;
+    height: 3rem; 
+    width: 6rem;
+    cursor: pointer;
+    background: white;
+    border: 1.5px solid rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.button:hover {
+    background-color: rgb(116, 58, 80);
+    border-color: rgb(116, 58, 80);
+    color: white;
+  }

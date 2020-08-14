@@ -10,7 +10,7 @@
 .photoContainer {
     margin: 2.5rem 0 0 4rem;
     width: 40%;
-    height: 35rem;
+    height: 25rem;
 }
 
 .photoContainer img {
@@ -127,16 +127,14 @@ input {
     font-size: 1.2rem;
 }
 
-.fundButtons button:disabled{
-    border: 1.5px solid rgb(116, 58, 80);
-}
-
 .fundButtons button:hover {
     background-color: rgb(116, 58, 80);
     border-color: rgb(116, 58, 80);
     color: white;
   }
-
+  .fundButtons button:disabled{
+    border: 1.5px solid rgb(116, 58, 80);
+}
 .error {
     color:red 
 }

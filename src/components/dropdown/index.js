@@ -1,5 +1,5 @@
 import styles from './index.module.css'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import UserContext from '../../Context'
 
@@ -13,6 +13,13 @@ function App() {
 
 function NavItem(props) {
   const [open, setOpen] = useState(false);
+  const history = useHistory()
+
+  useEffect(() => {
+    history.listen(location => {
+      setOpen(false)
+    })
+  }, [])
 
   return (
     <div className={styles.container} >

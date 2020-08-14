@@ -1,14 +1,14 @@
 const models = require('../models')
 async function username(username, action) {
-    const usernameRegex = new RegExp("^[a-zA-Z\\d]{4,15}$", "g")
+    const usernameRegex = /^[a-zA-Z ]{4,30}$/
 
     const user = await models.User.findOne({ username })
     if (username.length < 4) {
         return `Username must be at least 4 characters long.`
-    } else if (username.length > 15) {
-        return `Username must be maximum 15 characters long.`
+    } else if (username.length > 30) {
+        return `Username must be maximum 30 characters long.`
     } else if (!usernameRegex.test(username)) {
-        return `Username can contain only letters and digits.`
+        return `Username can contain only letters and spaces.`
     } else if (user !== null && action === 'register') {
         return `User already exists.`
     } else if (user === null && action === 'login') {
@@ -50,7 +50,7 @@ function rePassword(rePassword, password) {
 }
 
 function fundraiserName(name) {
-    const fundraiserNameRegex = new RegExp("^[a-zA-Z.!?\"'`-]{6,30}$", "g")
+    const fundraiserNameRegex = /^[a-zA-Z.!?\"'`-]{6,30}$/
 
     if (name.length < 6) {
         return "Name must be at least 6 characters."
