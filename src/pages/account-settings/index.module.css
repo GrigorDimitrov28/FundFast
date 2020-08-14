@@ -51,7 +51,7 @@
     margin-top: 3rem;
 }
 
-.changeInput input {
+input:not(.formInput){
     padding-left: 0.5rem;
     margin-left: 2rem;
     width: 24rem;

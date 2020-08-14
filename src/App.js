@@ -46,7 +46,7 @@ const App = (props) => {
           username: response.user.username,
           id: response.user._id,
           image: response.user.image,
-          money: response.money,
+          money: response.user.money,
           email: response.user.email
         })
       } else {

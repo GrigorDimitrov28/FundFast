@@ -17,7 +17,8 @@ const LazyCreateFundraiserPage = React.lazy(() => import('./pages/create-fundrai
 const LazyProfilePage = React.lazy(() => import('./pages/profile-page'))
 const LazyProfileSettingsPage = React.lazy(() => import('./pages/account-settings'))
 const LazyUnauthAccessPage = React.lazy(() => import('./pages/401'))
-
+const LazyDetailsPage = React.lazy(() => import('./pages/fundraiser-details'))
+const LazyNotFoundPage = React.lazy(() => import('./pages/404'))
 const LazyNavigation = () => {
     const context = useContext(UserContext)
 
@@ -31,8 +32,10 @@ const LazyNavigation = () => {
                     <Route path="/about" exact component={LazyAboutPage} />
                     <Route path="/create-fundraiser" exact component={LazyCreateFundraiserPage} />
                     <Route path="/500" exact component={LazyServerErrorPage} />
+                    <Route path="/404" exact component={LazyNotFoundPage} />
                     <Route path="/account-settings" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfileSettingsPage} />
                     <Route path="/account-info" exact component={!context.loggedIn ? LazyUnauthAccessPage : LazyProfilePage} />
+                    <Route path="/fundraiser/" component={LazyDetailsPage} />
                     {/* <Route component={LazyUnauthAccessPage} /> */}
                 </Suspense>
             </Switch>

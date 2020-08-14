@@ -13,17 +13,10 @@ const Footer = ({ type }) => {
                     </p>
                 </div>
                 <div>
-                    <h3>Explore</h3>
-                    <LinkComponent type="link" text="Donations" href="#" />
-                    <LinkComponent type="link" text="Campaigns" href="#" />
-                    <LinkComponent type="link" text="Product Development" href="#" />
-                    <LinkComponent type="link" text="Startups" href="#" />
-                </div>
-                <div>
                     <h3>About</h3>
-                    <LinkComponent type="link" text="Who are we" href="#" />
-                    <LinkComponent type="link" text="Our badge system" href="#" />
-                    <LinkComponent type="link" text="How to get started" href="#" />
+                    <LinkComponent type="link" text="Who are we" href="/about" />
+                    <LinkComponent type="link" text="How does FundFast work" href="/about" />
+                    <LinkComponent type="link" text="How to get started" href="/about" />
                 </div>
                 <div>
                     <h3>Contacts</h3>
