@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import Navbar from '../../components/navigation'
 import Footer from '../../components/footer'
@@ -10,9 +10,11 @@ import handleBlurCategory from '../../utils/validation/category'
 import handleBlurName from '../../utils/validation/fundraiser-name'
 import handleBlurLink from '../../utils/validation/link'
 import handleBlurDescription from '../../utils/validation/description'
+import handleBlurMoney from '../../utils/validation/money'
+import userContext from '../../Context'
 const CreateForm = () => {
     const history = useHistory()
-
+    const context = useContext(userContext)
     const [name, setName] = useState({
         value: '',
         errorMsg: ''
@@ -32,6 +34,11 @@ const CreateForm = () => {
         value: '',
         errorMsg: ''
     })
+
+    const [money, setMoney] = useState({
+        value: '',
+        errorMsg: ''
+    })
     const [isProcessing, setProcessing] = useState(false)
     const [isButtonDisabled, setDisabled] = useState(true)
     async function handleSubmit(e) {
@@ -41,7 +48,9 @@ const CreateForm = () => {
             name: name.value,
             category: category.value,
             image: image.value,
-            description: description.value
+            description: description.value,
+            money: money.value,
+            author: context.user.id
         }
 
         try {
@@ -53,11 +62,13 @@ const CreateForm = () => {
                 }
             })
             const response = await data.json()
-            if (response.nameError || response.categoryError || response.descriptionError || response.imageError) {
+            if (response.nameError || response.categoryError 
+                || response.descriptionError || response.imageError || response.moneyError) {
                 setName({ ...name, errorMsg: response['nameError'] })
                 setImage({ ...image, errorMsg: response['imageError'] })
                 setCategory({ ...category, errorMsg: response['categoryError'] })
                 setDescription({ ...description, errorMsg: response['descriptionError'] })
+                setMoney({...money, errorMsg: response['moneyError']})
                 setProcessing(false)
             } else if (response._id) {
                 console.log(response)
@@ -74,13 +85,13 @@ const CreateForm = () => {
     }
 
     useEffect(() => {
-        if(name.value && category.value && description.value && image.value
+        if (name.value && category.value && description.value && image.value
             && !name.errorMsg && !category.errorMsg && !description.errorMsg && !image.errorMsg
-            && !isProcessing){
-                setDisabled(false)
-            }
+            && !isProcessing) {
+            setDisabled(false)
+        }
     }, [name, category, image, description, isProcessing])
-    
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
@@ -110,10 +121,18 @@ const CreateForm = () => {
                     <Input name="img-link"
                         type="text"
                         value={image.value}
-                        onChange={((e) => setImage({ ...handleChange(e, 'link', image) }))}
+                        onChange={((e) => setImage({ ...handleChange(e, 'money', image) }))}
                         onBlur={() => setImage({ ...handleBlurLink(image) })}
                         placeholder="Image link" />
                     <p className={styles.error}> {image.errorMsg} </p>
+                    
+                    <Input name="money"
+                        type="text"
+                        value={money.value}
+                        onChange={((e) => setMoney({ ...handleChange(e, 'money', money) }))}
+                        onBlur={() => setMoney({ ...handleBlurMoney(money) })}
+                        placeholder="Funds needed" />
+                    <p className={styles.error}> {money.errorMsg} </p>
 
                     <textarea placeholder="Description"
                         className={styles.textarea}

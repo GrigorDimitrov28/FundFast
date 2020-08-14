@@ -67,6 +67,7 @@ const Featured = () => {
                 {!isLoaded && <h2 className={styles.noPosts}>Loading...</h2>}
                 {isLoaded && featured.length === 0 && <h2 className={styles.noPosts}>No fundraisers yet.</h2>}
                 {isLoaded && featured.map(data => <Card key={data._id}
+                id={data._id}
                 description={data.description.slice(0, 150)}
                 category={data.category}
                 name={data.name}

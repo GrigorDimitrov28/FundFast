@@ -33,6 +33,11 @@ const userSchema = new Schema({
 
     subscriptions: {
         type: Object
+    },
+
+    donated: {
+        type: Number,
+        default: 0
     }
 })
 

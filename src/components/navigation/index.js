@@ -14,7 +14,7 @@ const Navbar = () => {
             </div>
 
             <div className={styles.rightLinks}>
-                {context.loggedIn && <LinkComponent text="Explore" type="link" href="#" />}
+                {context.loggedIn && <LinkComponent text="Blog" type="link" href="#" />}
                 <LinkComponent text="About" type="link" href="/about" />
                 {context.loggedIn && <Dropdown />}
                 {!context.loggedIn && <LinkComponent text="Sign In" type="link" href="/login" />}

@@ -50,12 +50,13 @@ li {
 }
 
 .moto {
-    margin-left: 1.5rem;
+    margin-left: 3rem;
+    margin-right: auto;
 }
 
 .links div:not(.moto) {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 7rem;
+    margin-right: 5rem;
 }
 
 .links div a {
