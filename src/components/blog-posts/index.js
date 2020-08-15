@@ -8,11 +8,13 @@ const BlogPost = () => {
             <Link to={'/'}>
                 <img src="https://www.blogmarketingacademy.com/wp-content/uploads/2018/01/perfect-blog-post-1024x576.jpg" alt="blog-post" />
             </Link>
-            <h3>Blog Name</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget consectetur purus. Praesent nisi tortor, imperdiet eu malesuada convallis, consequat.
+            <div className={styles.blogContent}>
+                <h3 className={styles.blogName}>Blog Name</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget consectetur purus. Praesent nisi tortor, imperdiet eu malesuada convallis, consequat.
             </p>
-            <a href="/read-more">Read more</a>
+                <a href="/read-more">Read more</a>
+            </div>
         </div >
 
     )

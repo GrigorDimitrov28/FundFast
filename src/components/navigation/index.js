@@ -14,9 +14,12 @@ const Navbar = () => {
             </div>
 
             <div className={styles.rightLinks}>
-                {context.loggedIn && <LinkComponent text="Blog" type="link" href="#" />}
+                {context.loggedIn && <LinkComponent text="Blogs" type="link" href="#" />}
+                {context.loggedIn && <Dropdown navItemName="Fundraisers" menuClass="frDropdown"
+                links={['Donations', 'Campaigns', 'Product development', 'Startups']}/>}
                 <LinkComponent text="About" type="link" href="/about" />
-                {context.loggedIn && <Dropdown />}
+                {context.loggedIn && <Dropdown navItemName="More" menuClass="userDropdown"
+                links={['Account', 'Settings', 'Logout']}/>}
                 {!context.loggedIn && <LinkComponent text="Sign In" type="link" href="/login" />}
             </div>
         </nav>

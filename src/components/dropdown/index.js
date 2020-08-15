@@ -3,10 +3,10 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import UserContext from '../../Context'
 
-function App() {
+function App({ navItemName, links, menuClass }) {
   return (
-    <NavItem>
-      <DropdownMenu></DropdownMenu>
+    <NavItem name={navItemName}>
+      <DropdownMenu links={links} menuClass={menuClass}></DropdownMenu>
     </NavItem>
   );
 }
@@ -24,13 +24,13 @@ function NavItem(props) {
   return (
     <div className={styles.container} >
       <button className={styles.dropButton}
-        onClick={() => setOpen(!open)}> More </button>
+        onClick={() => setOpen(!open)}> {props.name} </button>
       {open && props.children}
     </div>
   );
 }
 
-function DropdownMenu() {
+function DropdownMenu({ links, menuClass }) {
   const history = useHistory()
   const context = useContext(UserContext)
 
@@ -38,7 +38,9 @@ function DropdownMenu() {
     context.logOut()
     history.push('/')
   }
-
+  const doNothing = () => {
+    return
+  }
   const handleSettingsClick = () => {
     history.push('/account-settings')
   }
@@ -48,16 +50,16 @@ function DropdownMenu() {
   }
 
   return (
-    <div className={styles.dropdown}>
-      <div className={styles['dropdown-item']} onClick={handleAccountInfoClick} >
-        <p>My profile</p>
-      </div>
-      <div className={styles['dropdown-item']} onClick={handleSettingsClick} >
-        <p>Settings</p>
-      </div>
-      <div className={styles['dropdown-item']} onClick={handleLogoutClick}>
-        <p>Logout</p>
-      </div>
+    <div className={styles[`${menuClass}`]}>
+      {links.map(link => {
+        return (
+          <div key={links.indexOf(link)} className={styles['dropdown-item']}
+           onClick={link === 'Account' ? handleAccountInfoClick : (link === 'Settings' ? handleSettingsClick :
+           (link === 'Logout' ? handleLogoutClick : doNothing))} >
+            <p>{link}</p>
+          </div>
+        )
+      })}
     </div>
   );
 }
