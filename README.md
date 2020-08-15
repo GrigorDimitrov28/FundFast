@@ -29,27 +29,27 @@ FundFast provides the following functionality:
   
 The following links are available: 
   # For guest users: 
-    ## /
-    ## /about
-    ## /register
-    ## /login
-    ## /fundraisers/(fundraiser-id)
-    ## /blog/(blog-id)
-    ## /500 /401 /404 (error pages)
+    /
+    /about
+    /register
+    /login
+    /fundraisers/(fundraiser-id)
+    /blog/(blog-id)
+    /500 /401 /404 (error pages)
   # For logged-in users: 
-    ## /
-    ## /about
-    ## /create-fundraiser
-    ## /account-settings
-    ## /account-info
-    ## /account-blogs
-    ## /account-fundraisers
-    ## /fundraisers/(fundraiser-id)
-    ## /blog/(blog-id)
-    ## /edit/(fundraiser-id)
-    ## /update/blog/(blog-id)
-    ## /create-blog
-    ## /blogs
-    ## /fundraisers
+    /
+    /about
+    /create-fundraiser
+    /account-settings
+    /account-info
+    /account-blogs
+    /account-fundraisers
+    /fundraisers/(fundraiser-id)
+    /blog/(blog-id)
+    /edit/(fundraiser-id)
+    /update/blog/(blog-id)
+    /create-blog
+    /blogs
+    /fundraisers
   
 
