@@ -20,12 +20,12 @@ How to run the website:
     ## npm run start
     
 FundFast provides the following functionality: 
-  ### Adding personal fundraisers and blog posts
-  ### Adjusting account settings and depositing virtual money
-  ### Donating money and liking different fundraisers
-  ### Managing own fundraisers
-  ### Adding comments to other people's blog posts
-  ### Tracking own and website's statistic
+  ### -Adding personal fundraisers and blog posts
+  ### -Adjusting account settings and depositing virtual money
+  ### -Donating money and liking different fundraisers
+  ### -Managing own fundraisers
+  ### -Adding comments to other people's blog posts
+  ### -Tracking own and website's statistic
   
 The following links are available: 
   # For guest users: 
