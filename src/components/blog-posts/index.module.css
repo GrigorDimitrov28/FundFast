@@ -1,6 +1,8 @@
 .container {
+    margin-top: 2rem;
     display:flex;
     flex-direction: column;
+    padding-bottom: 3rem;
 }
 .posts {
     flex-direction: column;
@@ -11,29 +13,51 @@
     margin-left: 2.5rem;
 }
 
-.topRow {
-    margin-left: 1.5rem;
-    margin-right: 2.5rem;
-    display: flex;
-}
-
-.bottomRow {
-    margin-left: 1.5rem;
-    margin-right: 2.5rem;
+.top {
     display: flex;
 }
 
 .post {
-    display:flex;
-    flex-direction:column;
-    margin : 1.5rem 1.5rem 1.5rem 2.5rem;
+    margin: 3rem 3rem 2rem 3rem;
+    width: 100%;
+    height: 25rem;
 }
 
-.post img {
+.photoContainer {
     border-radius: 20px;
-    object-fit: cover;
-    width: 100%;
-    height: 20rem;
+    width: 40%;
+    max-width: 40%;
+    height: 100%;
+    max-height: 100%;
+    background-position: 50% 50%;
+    background-size: cover;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+.create {
+    display: block;
+    margin: auto 0 auto 2rem;
+    height: 3rem; 
+    width: 10rem;
+    cursor: pointer;
+    background: white;
+    border: 1.5px solid rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.create:hover {
+    background-color: rgb(116, 58, 80);
+    border-color: rgb(116, 58, 80);
+    color: white;
+  }
+
+
+.post {
+    display:flex;
 }
 
 .blogName {
@@ -45,13 +69,17 @@
 }
 
 .blogContent {
+    width: 50%;
+    height: 10rem;
     border-left: 5px solid rgb(116, 58, 80);
+    margin-left: 3rem;
     padding-left: 1rem;
     margin-top: 1rem;
 }
 
 .post a {
     display: block;
+    width: 10%;
     margin-left: auto;
     text-align: right;
     font-size: 12pt;

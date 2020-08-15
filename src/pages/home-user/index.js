@@ -2,7 +2,7 @@
 import React from 'react'
 import { HomeHeaderPhoto } from '../../components/img-under-nav'
 import Featured from '../../components/featured'
-import BlogPosts from '../../components/blog-posts'
+import { BlogPosts } from '../../components/blog-posts'
 import Stats from '../../components/fundfast-stats'
 function LazyHomePage() {
   return (

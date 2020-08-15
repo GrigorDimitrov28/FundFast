@@ -22,6 +22,10 @@ const LazyDetailsPage = React.lazy(() => import('./pages/fundraiser-details'))
 const LazyNotFoundPage = React.lazy(() => import('./pages/404'))
 const LazyAccountFundraisersPage = React.lazy(() => import('./pages/user-fundraisers'))
 const LazyEditFundraiserPage = React.lazy(() => import('./pages/edit-fundraiser'))
+const LazyCreateBlogPage = React.lazy(() => import('./pages/create-blog'))
+const LazyAllBlogs = React.lazy(() => import('./pages/blogs'))
+const LazyAllFundraisers = React.lazy(() => import('./pages/all-fundraisers'))
+
 const LazyNavigation = () => {
 
     const context = useContext(UserContext)
@@ -43,6 +47,9 @@ const LazyNavigation = () => {
                 <Route path="/account-fundraisers" exact component={context.loggedIn ? LazyAccountFundraisersPage : LazyUnauthAccessPage} />
                 <Route path="/fundraiser/" component={LazyDetailsPage} />
                 <Route path="/edit/" component={LazyEditFundraiserPage} />
+                <Route path="/blogs" exact component={context.loggedIn ? LazyAllBlogs : LazyUnauthAccessPage} />
+                <Route path="/create-blog" exact component={context.loggedIn ? LazyCreateBlogPage : LazyUnauthAccessPage} />
+                <Route path="/fundraisers/" component={context.loggedIn ? LazyAllFundraisers : LazyUnauthAccessPage } />
                 <Route path="" component={LazyNotFoundPage} />
 
             </Switch>

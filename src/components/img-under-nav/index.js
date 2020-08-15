@@ -18,6 +18,22 @@ const HomeHeaderPhoto = ( { btnText, href, pText}) => {
     )
 }
 
+const BlogHeaderPhoto = ( {btnText, href, pText } ) =>{
+    return (
+        <div className={styles.container}>
+            <img className={styles['big-photo']}
+                src="./3.png" alt="header"/>
+
+            <div className={styles.join}>
+                <p className={styles.joinUsBlack}>{pText}</p>
+            </div>
+
+            <LinkComponent text={btnText} type={"button"} href={href} />
+
+        </div>
+    )
+}
+
 const AboutHeaderPhoto = ({ btnText, href, pText}) => {
     return (
         <div className={styles.container}>
@@ -33,6 +49,6 @@ const AboutHeaderPhoto = ({ btnText, href, pText}) => {
     )
 }
 
-export { HomeHeaderPhoto, AboutHeaderPhoto }
+export { HomeHeaderPhoto, AboutHeaderPhoto, BlogHeaderPhoto }
 
 

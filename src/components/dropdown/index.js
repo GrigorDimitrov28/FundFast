@@ -34,31 +34,26 @@ function DropdownMenu({ links, menuClass }) {
   const history = useHistory()
   const context = useContext(UserContext)
 
-  const handleLogoutClick = () => {
-    context.logOut()
-    history.push('/')
-  }
-  const doNothing = () => {
-    return
-  }
-  const handleSettingsClick = () => {
-    history.push('/account-settings')
-  }
-
-  const handleAccountInfoClick = () => {
-    history.push('/account-info')
+  const handleClick = e => {
+    const id = e.target.id || e.target.parentNode.id
+    if(id === 'Account') history.push('/account-info')
+    else if (id === 'Settings') history.push('/account-settings')
+    else if (id === 'Logout') {context.logOut(); history.push('/')}
+    else if(id === 'Donations') history.push('/fundraisers/Donations')
+    else if(id === 'Campaigns') history.push('/fundraisers/Campaigns')
+    else if(id === 'Product development') history.push('/fundraisers/ProductDevelopment')
+    else if(id === 'Startups') history.push('/fundraisers/Startups')
   }
 
   return (
     <div className={styles[`${menuClass}`]}>
       {links.map(link => {
-        return (
-          <div key={links.indexOf(link)} className={styles['dropdown-item']}
-           onClick={link === 'Account' ? handleAccountInfoClick : (link === 'Settings' ? handleSettingsClick :
-           (link === 'Logout' ? handleLogoutClick : doNothing))} >
-            <p>{link}</p>
-          </div>
-        )
+          return (
+            <div id={link} key={links.indexOf(link)} className={styles['dropdown-item']}
+              onClick={(e) => handleClick(e)} >
+              <p>{link}</p>
+            </div>
+          )
       })}
     </div>
   );

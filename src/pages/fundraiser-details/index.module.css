@@ -2,9 +2,9 @@
     display: flex;
     margin-top: 0.5rem;
     border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
     width: 100%;
     height: 30rem;
+    padding-bottom: 1rem;
 }
 
 .photoContainer {
@@ -20,6 +20,8 @@
 }
 
 .fundraiserDetails {
+    border-left: 0.2rem solid rgb(116, 58, 80, 0.3);
+    padding-left: 1rem;
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -48,7 +50,7 @@
 
 .fundraiserDescription p {
     display: block;
-    width: 75%;
+    width: 60%;
     word-wrap: break-word;
 }
 

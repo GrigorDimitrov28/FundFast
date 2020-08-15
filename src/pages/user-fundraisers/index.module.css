@@ -53,8 +53,15 @@
 
 .postImage {
     border-radius: 20px;
-    max-width: 50%;
-    max-height: 55%;
+    max-width: 65%;
+    max-height: 65%;
+}
+
+.bottomBorder{
+    background-color: rgb(116, 58, 80, 0.2);
+    width: 100%;
+    margin-top: 3rem;
+    height: 1rem;
 }
 
 .postCategory {

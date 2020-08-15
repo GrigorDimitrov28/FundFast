@@ -77,6 +77,7 @@ const Content = () => {
                                 </div>
 
                                 <p className={styles.postDescription}>{post.description}</p>
+                                <div className={styles.bottomBorder}></div>
                             </div>
                         </div>
                     )

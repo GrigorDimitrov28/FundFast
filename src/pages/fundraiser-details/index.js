@@ -52,6 +52,8 @@ const Content = () => {
     }, [history, id])
 
     const calcWidth = (needed, donated) => {
+        needed = Number(needed)
+        donated = Number(donated)
         if (donated === 0) {
             return { 'display': 'none' }
         } else if (donated >= needed) {
