@@ -1,0 +1,12 @@
+.content {
+    min-height: 35rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    margin: 2rem 2rem 2rem 2rem;
+    padding-top: 1rem;
+    border-top: 5px solid rgb(116, 58, 80, 0.4)
+}

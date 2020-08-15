@@ -11,6 +11,7 @@ const AccountInfo = () => {
     useEffect(() => {
         fetch(`http://localhost:9999/api/user?id=${context.user.id}`).then(data => data.json())
             .then(response => {
+                console.log(response)
                 response.money = response.money.toFixed(2)
                 context.user.money = response.money
                 setUser(response)
@@ -27,7 +28,7 @@ const AccountInfo = () => {
                 <Link to={'/account-settings'}
                     className={styles.internalLink}>Settings</Link>
                 <Link to={'/account-fundraisers'} className={styles.internalLink}>Fundraisers</Link>
-                <Link to={'/'} className={styles.internalLink}>Blog posts</Link>
+                <Link to={'/account-blogs'} className={styles.internalLink}>Blog posts</Link>
             </div>
             <div className={styles.mainContent}>
                 <div className={styles.leftContent}>
@@ -40,9 +41,9 @@ const AccountInfo = () => {
                 <div className={styles.rightContent}>
                     <h2>My stats: </h2>
                     <div className={styles.stats}>
-                        <p>0 Fundraisers</p>
-                        <p>0 Blog posts</p>
-                        <p>0 Dollars donated</p>
+                        <p>{user.fundraisers && user.fundraisers.length} Fundraisers</p>
+                        <p>{user.blogs && user.blogs.lenght} Blog posts</p>
+                        <p>{user.donated || 0} Dollars donated</p>
                     </div>
                     <h2>Balance: </h2>
                     <h1>{user.money} USD</h1>

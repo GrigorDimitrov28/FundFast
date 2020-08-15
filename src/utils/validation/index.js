@@ -8,6 +8,7 @@ import money from './money'
 import password from './password'
 import rePassword from './rePassword'
 import username from './username'
+import comment from './comment'
 
 export {
     category,
@@ -19,5 +20,6 @@ export {
     money,
     password,
     rePassword,
-    username
+    username,
+    comment
 }

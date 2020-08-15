@@ -40,7 +40,7 @@ const Featured = () => {
         }).then(promise => {
             return promise.json()
         }).then(response => {
-            setFeatured(response.splice(0, 4))
+            setFeatured(response)
             setLoaded(true)
         })
         }

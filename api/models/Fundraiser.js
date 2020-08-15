@@ -39,7 +39,12 @@ const fundraiserSchema = new Schema({
     donations: {
         type: Number,
         default: 0
-    }
+    },
+
+    likedBy: [{
+        type: ObjectId,
+        ref: 'User'
+    }]
 })
 
 

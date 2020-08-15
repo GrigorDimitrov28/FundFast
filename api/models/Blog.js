@@ -23,6 +23,10 @@ const fundraiserSchema = new Schema({
 
     author: {
         type: ObjectId
+    },
+
+    comments: {
+        type: Array
     }
 })
 

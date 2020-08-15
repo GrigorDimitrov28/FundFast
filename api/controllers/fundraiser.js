@@ -2,6 +2,25 @@ const models = require('../models')
 const utils = require('../utils')
 
 module.exports = {
+    getAll: async(req, res, next) => {
+        const { category } = req.body
+        const fundraisers = await models.Fundraiser.find({ 'category': category})
+        .catch(err => console.log(err))
+        res.send(fundraisers)
+    },
+    like: async(req,res,next) => {
+        const { uId, fId } = req.body
+        const fundraiser = await models.Fundraiser.findById(fId)
+
+        if(fundraiser.likedBy === undefined || !fundraiser.likedBy.includes(uId)){
+            await models.Fundraiser.findByIdAndUpdate(fId, {$push: {'likedBy': uId}})
+            res.send({liked: true})
+            
+        }else {
+            await models.Fundraiser.findByIdAndUpdate(fId, {$pull: {'likedBy': uId}})
+            res.send({unliked: true})
+        }
+    },
     delete: async (req, res, next) => {
         const { uId, fId } = req.body
         const fundraiser = await models.Fundraiser.findById(fId)
@@ -71,7 +90,7 @@ module.exports = {
     },
     getByCategory: (req, res, nex) => {
         models.Fundraiser.find({ category: req.body.category })
-            .then((data) => res.send(data))
+            .then((data) => res.send(data.sort((a,b) => b.likedBy.length - a.likedBy.length).slice(0, 4)))
             .catch((err) => res.status(500).send('Error'))
     },
 

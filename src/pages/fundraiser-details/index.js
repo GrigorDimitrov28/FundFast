@@ -10,6 +10,8 @@ const Content = () => {
     const id = window.location.href.replace('http://localhost:3000/fundraiser/', '')
     const [fundraiser, setFundraiser] = useState({})
     const context = useContext(UserContext)
+    const [isLiked, setLiked] = useState(false)
+    const [isProcessing, setProcessing] = useState(false)
     const [author, setAuthor] = useState({})
     const history = useHistory()
     const [money, setMoney] = useState({
@@ -40,6 +42,7 @@ const Content = () => {
                 don = data.money
                 don = don.toFixed(2)
                 data.money = don
+                if (data.likedBy.includes(context.user.id)) setLiked(true)
                 const author = await getAuthor(data.author)
                 setAuthor(author)
                 setFundraiser(data)
@@ -49,7 +52,7 @@ const Content = () => {
         }
         getFundraiser()
 
-    }, [history, id])
+    }, [history, id, isLiked])
 
     const calcWidth = (needed, donated) => {
         needed = Number(needed)
@@ -83,6 +86,25 @@ const Content = () => {
         }
     }
 
+    const handleLike = (e) => {
+        setProcessing(true)
+        fetch(`http://localhost:9999/api/fundraiser/like`, {
+            method: 'POST',
+            body: JSON.stringify({
+                uId: context.user.id,
+                fId: fundraiser._id
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(data => data.json()).then(res => {
+            if (res.liked) setLiked(true)
+            else if (res.unliked) setLiked(false)
+            setProcessing(false)
+        })
+
+    }
+
     return (
         <div className={styles.content}>
             <div className={styles.fundraiserStats}>
@@ -101,7 +123,12 @@ const Content = () => {
                     </div>
 
                     <div className={styles.moneyStats}>
-                        <p>Total donations: {fundraiser.donations}$</p>
+                        <div className={styles.Up}>
+                        <p >Total donations: {fundraiser.donations}$</p>
+                            <p >Likes: {fundraiser.likedBy && fundraiser.likedBy.length}</p>
+                        </div>
+
+                       
                         <div className={styles.progressOutside}>
                             <div className={styles.progressInside}
                                 style={calcWidth(fundraiser.money, fundraiser.donations)}></div>
@@ -115,6 +142,8 @@ const Content = () => {
                             onChange={(e) => setMoney({ ...changeHandler(e, 'money', money) })}
                             onBlur={() => setMoney({ ...moneyBlurHandler(money) })} />
                         <button onClick={() => handleClick()}>Donate</button>
+                        <button onClick={() => handleLike()}
+                            disabled={isProcessing}>{isLiked ? 'Unlike' : 'Like'}</button>
                     </div>}
                     {context.loggedIn && <p className={styles.error}>{money.errorMsg}</p>}
                 </div>

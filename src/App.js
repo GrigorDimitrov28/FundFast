@@ -47,7 +47,10 @@ const App = (props) => {
           id: response.user._id,
           image: response.user.image,
           money: response.user.money,
-          email: response.user.email
+          donated: response.user.donated,
+          email: response.user.email,
+          blogs: response.user.blogs,
+          fundraisers: response.user.fundraisers
         })
       } else {
         logOut()

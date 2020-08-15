@@ -86,3 +86,23 @@
     color: rgb(116, 58, 80);
     font-weight: bold;
 }
+
+.button {
+    display: block;
+    margin: 2rem 0 auto 0;
+    height: 3rem; 
+    width: 6rem;
+    cursor: pointer;
+    background: white;
+    border: 1.5px solid rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.button:hover {
+    background-color: rgb(116, 58, 80);
+    border-color: rgb(116, 58, 80);
+    color: white;
+  }

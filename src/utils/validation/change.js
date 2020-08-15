@@ -8,13 +8,18 @@ function handleChange(e, type, obj, password, subscribeType) {
     //TOTO: fix money regex
     const moneyRegex = /^[0-9]+(\.[0-9]{1,2})?$/
     const val = e.target.value === 'true' ? false : true
+    const commentRegex = /^[a-zA-Z\d.!,\s?"'`-]{100,250}$/
 
     type!== 'subscribe' ? obj.value = e.target.value : obj.value[subscribeType] = val
     if (type === "user" && usernameRegex.test(obj.value)) {
         obj.errorMsg = ""
 
         return obj
-    } else if (type === "password" && passwordRegex.test(obj.value)) {
+    } else if(type === 'comment' && commentRegex.test(obj.value)){
+        obj.errorMsg = ""
+
+        return obj
+    }else if (type === "password" && passwordRegex.test(obj.value)) {
         obj.errorMsg = ""
 
         return obj

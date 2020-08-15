@@ -1,0 +1,128 @@
+.content { 
+    min-height: 65rem;
+}
+
+.blogContent { 
+    display: flex;
+    border-top: 1px solid grey;
+    margin: 1rem 0 2rem 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid grey;
+}
+
+.blogImage {
+    display: block;
+    margin-left: 2rem;
+    border-radius: 20px;
+    max-width: 45%;
+    max-height: 100%;
+}
+
+.blogName { 
+    font-size: 3rem;
+}
+
+.author {
+    display: flex;
+}
+
+.author p {
+    display: block;
+    width: auto;
+    margin-right: 3rem;
+}
+
+.authorProfilePic {
+    margin-bottom: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 180px;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.authorName {
+    display: block;
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.blogDescription {
+    padding: auto 0 auto 0;
+    margin-left: 2rem;
+}
+
+.blogText {
+    font-family: 'Roboto';
+    line-height: 1.6;
+    width: 75%;
+    margin: 1rem 2rem 3rem 2rem;
+    font-size: 1.1rem;
+}
+
+.addComment {
+    margin-bottom: 2rem;
+    display: flex;
+    width: 100%;
+    border-top: 1px solid grey;
+}
+
+.textHolder {
+    width: 50%;
+}
+.textBox {
+    display: block;
+    outline: none;
+    border-radius: 10px;
+    margin: 2rem 0 2rem 2rem;
+    width: 100%;
+    border-bottom: 5px solid rgb(116, 58, 80);
+    height: 6rem;
+}
+
+.error {
+    display: block;
+    margin-left: 2rem;
+    color: red;
+}
+
+.button {
+    display: block;
+    height: 3rem; 
+    width: 12rem;
+    margin-top: 5.5rem;
+    margin-left: 3rem;
+    cursor: pointer;
+    background: white;
+    border: 1px solid rgb(116, 58, 80);
+    color: rgb(116, 58, 80);
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.button:hover {
+    background-color: rgb(116, 58, 80);
+    border-color: rgb(116, 58, 80);
+    color: white;
+  }
+
+.comments {
+    border-top: 1px solid grey;
+    min-height: 10rem;
+}
+
+.comm { 
+    border-radius: 20px;
+    width: 75%;
+    background-color: rgb(116, 58, 80, 0.2);
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 2rem 2rem 2rem 2rem;
+}
+
+.comm p {
+    word-wrap: break-word;
+}

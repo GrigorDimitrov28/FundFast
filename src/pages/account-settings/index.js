@@ -85,7 +85,7 @@ const AccountSettings = () => {
                 <Link to={'/account-settings'}
                     className={styles.activeLink}>Settings</Link>
                 <Link to={'/account-fundraisers'} className={styles.internalLink}>Fundraisers</Link>
-                <Link to={'/'} className={styles.internalLink}>Blog posts</Link>
+                <Link to={'/account-blogs'} className={styles.internalLink}>Blog posts</Link>
             </div>
             <div className={styles.options}>
                 <div className={styles.option}>

@@ -54,7 +54,7 @@ const Content = () => {
                 <Link to={'/account-settings'}
                     className={styles.internalLink}>Settings</Link>
                 <Link to={'/account-fundraisers'} className={styles.activeLink}>Fundraisers</Link>
-                <Link to={'/'} className={styles.internalLink}>Blog posts</Link>
+                <Link to={'/account-blogs'} className={styles.internalLink}>Blog posts</Link>
             </div>
             <div className={styles.fundraisers}>
                 {myPosts.length > 0 && myPosts.map(post => {

@@ -137,6 +137,18 @@ input {
   .fundButtons button:disabled{
     border: 1.5px solid rgb(116, 58, 80);
 }
+
+.fundButtons button:last-child{
+    background-color: rgb(116, 58, 80);
+    border-color: rgb(116, 58, 80);
+    color: white;
+    display:block;
+    width: 5rem;
+}
 .error {
     color:red 
+}
+
+.Up {
+    display: flex;
 }

@@ -25,7 +25,9 @@ const LazyEditFundraiserPage = React.lazy(() => import('./pages/edit-fundraiser'
 const LazyCreateBlogPage = React.lazy(() => import('./pages/create-blog'))
 const LazyAllBlogs = React.lazy(() => import('./pages/blogs'))
 const LazyAllFundraisers = React.lazy(() => import('./pages/all-fundraisers'))
-
+const LazyUserBlogs = React.lazy(() => import('./pages/user-blogs'))
+const LazyEditBlogPage = React.lazy(() => import('./pages/edit-blog'))
+const LazyBlogDetailsPage = React.lazy(() => import('./pages/blog-details'))
 const LazyNavigation = () => {
 
     const context = useContext(UserContext)
@@ -47,9 +49,12 @@ const LazyNavigation = () => {
                 <Route path="/account-fundraisers" exact component={context.loggedIn ? LazyAccountFundraisersPage : LazyUnauthAccessPage} />
                 <Route path="/fundraiser/" component={LazyDetailsPage} />
                 <Route path="/edit/" component={LazyEditFundraiserPage} />
+                <Route path="/update/blog/" component={LazyEditBlogPage} />
                 <Route path="/blogs" exact component={context.loggedIn ? LazyAllBlogs : LazyUnauthAccessPage} />
                 <Route path="/create-blog" exact component={context.loggedIn ? LazyCreateBlogPage : LazyUnauthAccessPage} />
                 <Route path="/fundraisers/" component={context.loggedIn ? LazyAllFundraisers : LazyUnauthAccessPage } />
+                <Route path="/blog/" component={context.loggedIn ? LazyBlogDetailsPage : LazyUnauthAccessPage} />
+                <Route path="/account-blogs" exact component={context.loggedIn ? LazyUserBlogs : LazyUnauthAccessPage} />
                 <Route path="" component={LazyNotFoundPage} />
 
             </Switch>
