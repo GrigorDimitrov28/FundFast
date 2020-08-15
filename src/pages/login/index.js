@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import * as validator from '../../utils/validation'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
-
+import GoogleLogin from 'react-google-login'
 const LoginForm = () => {
     const [user, setUser] = useState({
         value: '',
@@ -53,6 +53,31 @@ const LoginForm = () => {
             }
     }, [user, password, isProcessing])
 
+    const responseGoogle = async response => {
+        const username = response.Pt.Cd
+        const password = response.profileObj.googleId + 'Aa@'
+
+
+        const auth = await authenticate('http://localhost:9999/api/user/login', {
+            username,
+            password
+        }, (user) => {
+            context.logIn(user)
+            history.push('/')
+        }, (err) => {
+            console.log('Error', err)
+            setProcessing(false)
+        }, () => {
+            history.push('/500')
+        })
+
+        if (auth && (auth.usernameError || auth.passwordError)) {
+            setUser({ ...user, errorMsg: auth.usernameError })
+            setPassword({ ...password, errorMsg: auth.passwordError })
+            setProcessing(false)
+        }
+    }
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
@@ -87,6 +112,11 @@ const LoginForm = () => {
                         or
                         <hr />
                 </div>
+                <GoogleLogin buttonText="Sign in with Google"
+                    clientId="155834947985-00hslqcd8pcpep47hu7smrti8ju2hmeb.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'} />
                 <div className={styles.new}>
                     <p>New to FundFast?</p>
                     <Link to={'/register'} className={styles.register}>Sign Up</Link>

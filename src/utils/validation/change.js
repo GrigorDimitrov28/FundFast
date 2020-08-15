@@ -1,5 +1,5 @@
 function handleChange(e, type, obj, password, subscribeType) {
-    const usernameRegex = /^[a-zA-Z ]{4,30}$/
+    const usernameRegex = /^[a-zA-Z а-яА-Я]{2,60}$/gu
     const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", "g")
     const fundraiserNameRegex = new RegExp("^[a-zA-Z.!?\"'`-]{6,30}$", "g")
     const linkRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/

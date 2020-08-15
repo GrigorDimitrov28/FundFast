@@ -7,8 +7,8 @@ function handleBlurPassword(password) {
     if (password.value.length < 8) {
         password.errorMsg = `Password must be at least 8 characters long.`
         return password
-    } else if (password.value.length > 20) {
-        password.errorMsg = `Password must be maximum 20 characters long.`
+    } else if (password.value.length > 50) {
+        password.errorMsg = `Password must be maximum 50 characters long.`
         return password
     } else if (!specialCharRegex.test(password.value)) {
         password.errorMsg = `Password must contain one of these (@, $, !, %, *, ?, &).`

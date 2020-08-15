@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import * as validator from '../../utils/validation'
 import authenticate from '../../utils/auth/auth'
 import UserContext from '../../Context'
+import GoogleLogin from 'react-google-login'
 
 const RegisterForm = () => {
     const [user, setUser] = useState({
@@ -61,6 +62,34 @@ const RegisterForm = () => {
         }
     }, [user, password, rePassword, isProcessing])
 
+    const responseGoogle = async (response) => {
+        console.log(response)
+        const username = response.Pt.Cd
+        const password = response.profileObj.googleId + 'Aa@'
+        const rePassword = response.profileObj.googleId + 'Aa@'
+        
+        const auth = await authenticate('http://localhost:9999/api/user/register', {
+            username,
+            password,
+            rePassword
+        }, (user) => {
+            context.logIn(user)
+            history.push('/')
+        }, (err) => {
+            console.log('Error', err)
+            setProcessing(false)
+        }, () => {
+            history.push('/500')
+        })
+
+        if (auth && (auth.usernameError || auth.passwordError || auth.rePasswordError)) {
+            setUser({ ...user, errorMsg: auth.usernameError })
+            setPassword({ ...password, errorMsg: auth.passwordError })
+            setRePassword({ ...rePassword, errorMsg: auth.rePasswordError })
+            setProcessing(false)
+        }
+    }
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginWrapper}>
@@ -101,6 +130,11 @@ const RegisterForm = () => {
                         or
                         <hr />
                 </div>
+                <GoogleLogin buttonText="Sign up with Google"
+                    clientId="155834947985-00hslqcd8pcpep47hu7smrti8ju2hmeb.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'} />
                 <div className={styles.new}>
                     <p>Already a member?</p>
                     <Link to={'/login'} className={styles.register}>Sign In</Link>
