@@ -18,7 +18,7 @@ const AccountInfo = () => {
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [context.user.id])
+    }, [context.user.id, context.user.money])
 
     return (
         <div className={styles.content}>

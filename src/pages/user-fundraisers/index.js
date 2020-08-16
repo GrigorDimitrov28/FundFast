@@ -24,7 +24,7 @@ const Content = () => {
         }
 
         getPosts()
-    }, [])
+    }, [context.user.id])
 
     const handleClick = async id => {
         const request = await fetch('http://localhost:9999/api/fundraiser/delete', {
@@ -61,7 +61,7 @@ const Content = () => {
                     return (
                         <div key={post._id}
                             className={styles.post}>
-                            <img className={styles.postImage} src={post.image} />
+                            <img className={styles.postImage} src={post.image} alt="fundraiser"/>
                             <div className={styles.postContent}>
                                 <div className={styles.upperPostContent}>
                                     <div className={styles.leftUpperPostContent}>

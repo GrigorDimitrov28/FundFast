@@ -19,7 +19,7 @@ function NavItem(props) {
     history.listen(location => {
       setOpen(false)
     })
-  }, [])
+  }, [history])
 
   return (
     <div className={styles.container} >

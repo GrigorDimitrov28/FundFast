@@ -50,10 +50,10 @@ function rePassword(rePassword, password) {
 }
 
 function fundraiserName(name) {
-    const fundraiserNameRegex = /^[a-zA-Z.!?\"'`-]{6,30}$/
+    const fundraiserNameRegex = /^[a-zA-Z.!?\"'`-]{3,30}$/
 
-    if (name.length < 6) {
-        return "Name must be at least 6 characters."
+    if (name.length < 3) {
+        return "Name must be at least 3 characters."
     } else if (name.length > 30) {
         return "Name must be maximum 30 characters."
     } else if (!fundraiserNameRegex.test(name)) {

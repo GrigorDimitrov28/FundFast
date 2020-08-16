@@ -36,7 +36,7 @@ const Content = () => {
         }
 
         getBlog()
-    }, [])
+    }, [bId])
 
     const submitComment = () => {
         fetch('http://localhost:9999/api/blog/comment', {
@@ -56,7 +56,7 @@ const Content = () => {
     return (
         <div className={styles.content}>
             <div className={styles.blogContent}>
-                <img className={styles.blogImage} src={blog.image} />
+                <img className={styles.blogImage} src={blog.image} alt="blog"/>
                 <div className={styles.blogDescription}>
                     <h1 className={styles.blogName}>{blog.name}</h1>
                     <div className={styles.author}>

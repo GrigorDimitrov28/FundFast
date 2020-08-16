@@ -25,15 +25,6 @@ const AccountSettings = () => {
         errorMsg: ''
     })
 
-    const [subscribe, setSubscribe] = useState({
-        value: {
-            'Donations': false,
-            'Campaigns': false,
-            'Product development': false,
-            'Startups': false
-        },
-        errorMsg: ''
-    })
     const [isProcessing, setProcessing] = useState(false)
     const [isMoneyButtonDisabled, setMoneyDisabled] = useState(true)
     const [isEmailButtonDisabled, setEmailDisabled] = useState(true)
@@ -73,6 +64,7 @@ const AccountSettings = () => {
             setMoney({ ...money, errorMsg: response['moneyError'] })
             setProcessing(false)
         } else {
+            context.user.money = response.money
             history.push('/account-info')
         }
     }
@@ -148,56 +140,6 @@ const AccountSettings = () => {
                             onClick={() => handleClick(email, 'email')}>
                             Submit email
                         </button>
-                    </div>
-                </div>
-
-                <div className={styles.option}>
-                    <h2>Get notified about: </h2>
-                    <div className={styles.formContent}>
-                        <form>
-                            <input className={styles.formInput}
-                                type="checkbox"
-                                value={subscribe.value['Donations']}
-                                id="Donations"
-                                onChange={(e) => {
-                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Donations') })
-                                    console.log(subscribe)
-                                }} />
-                            <label htmlFor="Donations">Donations</label>
-
-                            <input className={styles.formInput}
-                                type="checkbox"
-                                id="Campaigns"
-                                value={subscribe.value['Campaigns']}
-                                onChange={(e) => {
-                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Campaigns') })
-                                    console.log(subscribe)
-                                }} />
-                            <label htmlFor="Campaigns">Campaigns</label>
-
-                            <input className={styles.formInput}
-                                type="checkbox"
-                                id="Product development"
-                                value={subscribe.value['Product development']}
-                                onChange={(e) => {
-                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Product development') })
-                                    console.log(subscribe)
-                                }} />
-                            <label htmlFor="Product development">Product development</label>
-
-                            <input className={styles.formInput}
-                                type="checkbox"
-                                id="Startups"
-                                value={subscribe.value['Startups']}
-                                onChange={(e) => {
-                                    setSubscribe({ ...validator.change(e, 'subscribe', subscribe, '', 'Startups') })
-                                    console.log(subscribe)
-                                }} />
-                            <label htmlFor="Startups">Startups</label>
-                        </form>
-                        <button type="submit"
-                            className={styles.formSubmit}
-                            onClick={() => handleClick(subscribe, 'subscriptions')}>Subscribe</button>
                     </div>
                 </div>
             </div>

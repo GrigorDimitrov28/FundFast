@@ -10,3 +10,8 @@
     padding-top: 1rem;
     border-top: 5px solid rgb(116, 58, 80, 0.4)
 }
+
+.no {
+    display: block;
+    margin: auto;
+}

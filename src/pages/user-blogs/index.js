@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
 import styles from './index.module.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import UserContext from '../../Context'
 import { BlogPost } from '../../components/blog-posts'
 const Content = () => {
     const [myBlogs, setBlogs] = useState([])
     const context = useContext(UserContext)
-    const history = useHistory()
 
     useEffect(() => {
         async function getBlogs() {
@@ -25,26 +24,7 @@ const Content = () => {
         }
 
         getBlogs()
-    }, [])
-
-    const handleClick = async id => {
-        const request = await fetch('http://localhost:9999/api/blog/delete', {
-            method: 'POST',
-            body: JSON.stringify({
-                bId: id,
-                uId: context.user.id
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        })
-        const response = await request.json()
-
-        if (response.notAuth) {
-            history.push('/401')
-        } else if (response.completed) {
-            history.go(0)
-        }
-
-    }
+    }, [context.user.id])
 
     return (
         <div className={styles.content}>

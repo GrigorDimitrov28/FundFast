@@ -73,7 +73,7 @@ const BlogPosts = () => {
             </div>
             <div className={styles.posts}>
                 {blogs.map(blog => {
-                    return <BlogPost id={blog._id} name={blog.name} description={blog.description} image={blog.image} />
+                    return <BlogPost key={blog._id} id={blog._id} name={blog.name} description={blog.description} image={blog.image} />
                 })}
             </div>
         </div>

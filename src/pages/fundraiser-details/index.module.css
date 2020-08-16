@@ -49,6 +49,8 @@
 }
 
 .fundraiserDescription p {
+    font-family: 'Roboto';
+    line-height: 1.6;
     display: block;
     width: 60%;
     word-wrap: break-word;

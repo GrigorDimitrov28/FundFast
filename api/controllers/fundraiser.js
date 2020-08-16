@@ -85,7 +85,8 @@ module.exports = {
         } else {
             await models.User.findByIdAndUpdate(uId, { $inc: { 'money': -donation, 'donated': donation } })
             await models.Fundraiser.findByIdAndUpdate(fId, { $inc: { 'donations': donation } })
-            res.send('Donation completed')
+            const money = await models.Fundraiser.findById(fId)
+            res.send({m: money.donations})
         }
     },
     getByCategory: (req, res, nex) => {

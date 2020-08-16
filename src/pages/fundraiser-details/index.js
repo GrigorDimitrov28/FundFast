@@ -35,7 +35,6 @@ const Content = () => {
 
             const data = await post.json()
             if (data._id) {
-                console.log(data)
                 let don = data.donations
                 don = don.toFixed(2)
                 data.donations = don
@@ -52,7 +51,7 @@ const Content = () => {
         }
         getFundraiser()
 
-    }, [history, id, isLiked])
+    }, [history, id, isLiked, context.user.id])
 
     const calcWidth = (needed, donated) => {
         needed = Number(needed)
@@ -82,7 +81,10 @@ const Content = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(data => history.go(0)).catch(err => console.error(err))
+            }).then(data => data.json()).then(res => {
+                setFundraiser({...fundraiser, donations: res.m.toFixed(2)})
+                setMoney({...money, value: ''})
+            }).catch(err => console.error(err))
         }
     }
 

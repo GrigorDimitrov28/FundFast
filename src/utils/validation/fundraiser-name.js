@@ -1,8 +1,8 @@
 const handleBlurName = (name) => {
-    const fundraiserNameRegex = new RegExp("^[a-zA-Z.!?\"'`-]{6,30}$", "g")
+    const fundraiserNameRegex = new RegExp("^[a-zA-Z.!?\"'`-]{3,30}$", "g")
 
-    if(name.value.length < 6) {
-        name.errorMsg = "Name must be at least 6 characters."
+    if(name.value.length < 3) {
+        name.errorMsg = "Name must be at least 3 characters."
         return name
     }else if (name.value.length > 30){
         name.errorMsg = "Name must be maximum 30 characters."

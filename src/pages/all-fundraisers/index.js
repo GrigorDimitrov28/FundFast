@@ -31,11 +31,11 @@ const Content = () => {
         }
 
         getPosts()
-    }, [])
+    }, [category])
 
     return (
         <div className={styles.content}>
-            {posts && posts.map(row => {
+            {posts && (posts.length === 0 ? <h1 className={styles.no}>No fundraisers yet.</h1> : posts.map(row => {
                 return (
                     <div className={styles.row}> {row.length > 0 && row.map(fr => {
 
@@ -45,7 +45,7 @@ const Content = () => {
                     
                     </div>
                 )
-            })}
+            }))}
         </div>
     )
 }

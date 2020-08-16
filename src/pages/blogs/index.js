@@ -22,7 +22,8 @@ const AllPosts = () => {
             <div className={styles.content}>
                 <div className={styles.posts}>
                     {blogs.map(blog => {
-                        return <BlogPost name={blog.name} description={blog.description} image={blog.image} />
+                        return <BlogPost 
+                        id={blog._id} name={blog.name} description={blog.description} image={blog.image} />
                     })}
                 </div>
             </div>
